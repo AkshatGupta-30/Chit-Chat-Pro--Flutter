@@ -1,4 +1,7 @@
+import 'package:chit_chat_pro/src/pages/prompt_view.dart';
+import 'package:chit_chat_pro/src/pages/textfield_view.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -11,10 +14,9 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.all(20),
         child: Column(
           children: [
-            Expanded(child: Center(child: Text('Prompt Field'))),
-            TextField(
-              decoration: InputDecoration(hintText: 'Hint Text'),
-            )
+            PromptView(),
+            Gap(20),
+            BottomView()
           ],
         ),
       ),
