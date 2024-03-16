@@ -21,3 +21,8 @@ flutter:
   
   assets:
     - .env
+
+  fonts:
+    - family: LovelyMamma
+      fonts:
+        - asset: assets/fonts/lovelyMamma.ttf
