@@ -1,4 +1,4 @@
-import 'package:chit_chat_pro/pages/home_page.dart';
+import 'package:chit_chat_pro/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
