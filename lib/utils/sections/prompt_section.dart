@@ -1,8 +1,10 @@
+import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class PromptSection extends StatelessWidget {
-  PromptSection({super.key});
+  final Message userPrompt;
+  PromptSection(this.userPrompt, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class PromptSection extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             SizedBox(width: 30,), Gap(5),
-            Expanded(child: Text('Here is the Prompt.', style: Theme.of(context).primaryTextTheme.bodyLarge,))
+            Expanded(child: Text(userPrompt.content, style: Theme.of(context).primaryTextTheme.bodyLarge,))
           ]
         )
       ],

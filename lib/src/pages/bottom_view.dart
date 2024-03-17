@@ -1,7 +1,6 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
@@ -17,22 +16,20 @@ class BottomView extends StatelessWidget {
         children: [
           TextField(
             controller: controller.textController,
+            focusNode: controller.focusNode,
+            textInputAction: TextInputAction.newline,
+            keyboardType: TextInputType.multiline,
+            minLines: 1, maxLines: 6,
+            style: Theme.of(context).primaryTextTheme.bodyLarge,
             decoration: InputDecoration(
               hintText: "Share your thoughts with us.",
-              suffixIcon: CloseButton(onPressed: () => controller.textController.text = '',)
+              suffixIcon: CloseButton(onPressed: () => controller.textController.clear(),)
             ),
+            onTapOutside: (event) => controller.focusNode.unfocus(),
           ),
           Gap(10),
           ElevatedButton(
-            onPressed: (controller.isMainChat.value)
-              ? () {
-                if(controller.textController.text.isNotEmpty) {
-                  // TODO - Api Call
-                } else {
-                  "Empty Text".printError();
-                }
-              }
-              : null,
+            onPressed: () => (controller.isMainChat.value && controller.textController.text.isNotEmpty) ? controller.submit() : null,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

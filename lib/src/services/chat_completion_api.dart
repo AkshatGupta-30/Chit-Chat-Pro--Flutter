@@ -19,9 +19,9 @@ class ChatCompletionApi {
     //   'max_tokens': maxTokens,
     //   'temperature': temperatures,
     // });
-    jsonEncode(chatRequest.toJson()).toString().printInfo();
+    jsonEncode(chatRequest.toMap()).toString().printInfo();
 
-    final response = await http.post(Uri.parse(chatUrl), headers: headers, body: jsonEncode(chatRequest.toJson()));
+    final response = await http.post(Uri.parse(chatUrl), headers: headers, body: jsonEncode(chatRequest.toMap()));
     if(response.statusCode != 200) {
       "Open Ai Api\nStatus Code : ${response.statusCode}\nMessage : ${jsonDecode(response.body)['Message']['error']['message']}".printError();
       return {};

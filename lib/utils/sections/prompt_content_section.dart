@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class PromptContentSection extends StatelessWidget {
-  final Message gptMessage;
-  PromptContentSection(this.gptMessage, {super.key});
+  final Message gptMessage, userPrompt;
+  PromptContentSection(this.userPrompt, this.gptMessage, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class PromptContentSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          PromptSection(),
+          PromptSection(userPrompt),
           Gap(7), Divider(color: Colors.white54,), Gap(7),
           ContentSection(gptMessage)
         ],
