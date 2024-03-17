@@ -1,13 +1,16 @@
+import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ContentSection extends StatelessWidget {
-  final Message gptMessage;
-  ContentSection(this.gptMessage, {super.key});
+  final ChatController controller;
+  final int index;
+  ContentSection(this.controller, this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    Message gptContent = controller.contents[index];
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -29,7 +32,7 @@ class ContentSection extends StatelessWidget {
           children: [
             SizedBox(width: 30,),
             Gap(5),
-            Expanded(child: Text(gptMessage.content, style: Theme.of(context).primaryTextTheme.bodyLarge,))
+            Expanded(child: Text(gptContent.content, style: Theme.of(context).primaryTextTheme.bodyLarge,))
           ]
         )
       ],
