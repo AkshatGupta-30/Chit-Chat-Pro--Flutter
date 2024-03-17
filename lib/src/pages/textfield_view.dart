@@ -8,32 +8,35 @@ class BottomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          decoration: InputDecoration(
-            hintText: 'Hint Text',
-            suffixIcon: CloseButton() // TODO : Remove Text
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              hintText: 'Hint Text',
+              suffixIcon: CloseButton() // TODO : Remove Text
+            ),
           ),
-        ),
-        Gap(10),
-        ElevatedButton(
-          onPressed: () {}, // TODO : Submit enable disable
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Submit', style: Theme.of(context).primaryTextTheme.headlineSmall,),
-              Gap(2),
-              Iconify(MaterialSymbols.send_rounded, size: 32, color: Colors.white,)
-            ],
+          Gap(10),
+          ElevatedButton(
+            onPressed: () {}, // TODO : Submit enable disable
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Submit', style: Theme.of(context).primaryTextTheme.headlineSmall,),
+                Gap(2),
+                Iconify(MaterialSymbols.send_rounded, size: 32, color: Colors.white,)
+              ],
+            ),
           ),
-        ),
-        Gap(10),
-        Text(
-          "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",
-          style: Theme.of(context).primaryTextTheme.bodySmall,
-        )
-      ],
+          Gap(10),
+          Text(
+            "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",
+            style: Theme.of(context).primaryTextTheme.bodySmall,
+          )
+        ],
+      ),
     );
   }
 }

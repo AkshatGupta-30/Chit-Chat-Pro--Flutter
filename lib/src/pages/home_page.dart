@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Chit Chat Pro'),),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.only(top: 6),
         child: Column(
           children: [
             PromptView(),
