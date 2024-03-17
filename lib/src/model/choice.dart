@@ -24,4 +24,13 @@ class Choice {
       finishReason: FinishReason.fromStr(json['finish_reason']),
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'index': index,
+      'message': message.toMap(), // Convert Message to a map
+      'logprobs': logprobs,
+      'finish_reason': finishReason.toStr,
+    };
+  }
 }

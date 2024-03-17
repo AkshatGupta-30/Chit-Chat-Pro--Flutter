@@ -7,7 +7,7 @@ class Message {
     return Message(role: json['role'], content: json['content']);
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'role': role,
       'content': content,

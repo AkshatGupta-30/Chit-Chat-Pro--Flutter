@@ -35,4 +35,16 @@ class ChatResponse {
       usage: usage,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'object': object,
+      'created': created.toIso8601String(),
+      'model': model.toStr,
+      'system_fingerprint': systemFingerprint,
+      'choices': choices.map((choice) => choice.toMap()).toList(),
+      'usage': usage.toMap(),
+    };
+  }
 }

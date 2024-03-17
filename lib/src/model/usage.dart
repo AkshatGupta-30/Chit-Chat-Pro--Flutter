@@ -12,4 +12,12 @@ class Usage {
       totalTokens: json['total_tokens'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'prompt_tokens': promptTokens,
+      'completion_tokens': completionTokens,
+      'total_tokens': totalTokens,
+    };
+  }
 }
