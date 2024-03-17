@@ -1,5 +1,5 @@
-import 'package:chit_chat_pro/src/pages/prompt_view.dart';
-import 'package:chit_chat_pro/src/pages/textfield_view.dart';
+import 'package:chit_chat_pro/src/pages/main_view.dart';
+import 'package:chit_chat_pro/src/pages/bottom_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
