@@ -1,10 +1,13 @@
+import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
 class BottomView extends StatelessWidget {
-  BottomView({super.key});
+  final ChatController controller;
+  BottomView(this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +16,23 @@ class BottomView extends StatelessWidget {
       child: Column(
         children: [
           TextField(
+            controller: controller.textController,
             decoration: InputDecoration(
-              hintText: 'Hint Text',
-              suffixIcon: CloseButton() // TODO : Remove Text
+              hintText: "Share your thoughts with us.",
+              suffixIcon: CloseButton(onPressed: () => controller.textController.text = '',)
             ),
           ),
           Gap(10),
           ElevatedButton(
-            onPressed: () {}, // TODO : Submit enable disable
+            onPressed: (controller.isMainChat.value)
+              ? () {
+                if(controller.textController.text.isNotEmpty) {
+                  // TODO - Api Call
+                } else {
+                  "Empty Text".printError();
+                }
+              }
+              : null,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
