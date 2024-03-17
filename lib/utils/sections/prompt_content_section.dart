@@ -1,10 +1,12 @@
+import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:chit_chat_pro/utils/sections/content_section.dart';
 import 'package:chit_chat_pro/utils/sections/prompt_section.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class PromptContentSection extends StatelessWidget {
-  PromptContentSection({super.key});
+  final Message gptMessage;
+  PromptContentSection(this.gptMessage, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class PromptContentSection extends StatelessWidget {
         children: [
           PromptSection(),
           Gap(7), Divider(color: Colors.white54,), Gap(7),
-          ContentSection()
+          ContentSection(gptMessage)
         ],
       )
     );

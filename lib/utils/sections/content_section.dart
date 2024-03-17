@@ -1,8 +1,10 @@
+import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class ContentSection extends StatelessWidget {
-  ContentSection({super.key});
+  final Message gptMessage;
+  ContentSection(this.gptMessage, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ContentSection extends StatelessWidget {
           children: [
             SizedBox(width: 30,),
             Gap(5),
-            Expanded(child: Text('Here is the msg.', style: Theme.of(context).primaryTextTheme.bodyLarge,))
+            Expanded(child: Text(gptMessage.content, style: Theme.of(context).primaryTextTheme.bodyLarge,))
           ]
         )
       ],
