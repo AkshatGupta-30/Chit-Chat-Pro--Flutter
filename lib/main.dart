@@ -16,6 +16,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chit Chat Pro',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'LovelyMamma',
         scaffoldBackgroundColor: Color(0xFF0F0F0F),

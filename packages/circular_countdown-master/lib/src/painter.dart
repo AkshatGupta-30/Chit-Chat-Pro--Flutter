@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 /// Painter that draws the circular countdown.
 class CircularCountdownPainter extends CustomPainter {
   /// Creates a [CircularCountdownPainter].
-  const CircularCountdownPainter({
+  CircularCountdownPainter({
     required this.countdownTotal,
     required this.countdownRemaining,
     required this.countdownTotalColor,
@@ -14,6 +14,7 @@ class CircularCountdownPainter extends CustomPainter {
     required this.gapFactor,
     required this.isClockwise,
     this.countdownCurrentColor,
+    this.text,
     this.textStyle,
   });
 
@@ -42,6 +43,10 @@ class CircularCountdownPainter extends CustomPainter {
 
   /// Whether the countdown is drawn clockwise or not.
   final bool isClockwise;
+
+  /// The `Text` is use to display the center text in the countdown
+  /// Default value is `countdownRemaining`
+  final String? text;
 
   /// The `TextStyle` to use to display the `countdownRemaining` value
   /// in the center of the widget.
@@ -139,12 +144,12 @@ class CircularCountdownPainter extends CustomPainter {
     // if there is enough space.
     if (textStyle != null) {
       final _innerDiameter = _getInnerDiameter(size.width);
-      final text = TextSpan(
-        text: countdownRemaining.toString(),
+      final countdownText = TextSpan(
+        text: text ?? countdownRemaining.toString(),
         style: textStyle,
       );
       final textPainter = TextPainter(
-        text: text,
+        text: countdownText,
         textDirection: TextDirection.ltr,
         maxLines: 1,
       )..layout(
@@ -156,7 +161,7 @@ class CircularCountdownPainter extends CustomPainter {
         maxHeight: _innerDiameter,
       );
       final RenderParagraph renderParagraph = RenderParagraph(
-        text,
+        countdownText,
         textDirection: TextDirection.ltr,
         overflow: TextOverflow.ellipsis,
         maxLines: 1,

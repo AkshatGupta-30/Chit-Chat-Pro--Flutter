@@ -30,8 +30,8 @@ class PromptSection extends StatelessWidget {
             ),
             Gap(4),
             if(controller.contents.length-1 == index) ...[
-              InkWell(
-                onTap: () => controller.refreshChat(),
+              InkWell(// TODO - handle disabled button
+                onTap: () => (controller.isButtonEnabled.value) ? controller.refreshChat() : null,
                 child: Iconify(Typcn.refresh_outline, color: Colors.grey, size: 27,)
               ),
               Gap(4),

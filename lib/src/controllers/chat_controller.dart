@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chit_chat_pro/src/model/choice.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:chit_chat_pro/src/model/request.dart';
@@ -9,6 +11,10 @@ import 'package:get/get.dart';
 import 'package:super_string/super_string.dart';
 
 class ChatController extends GetxController {
+  RxInt countdown = 0.obs;
+  RxBool isButtonEnabled = true.obs;
+  Timer? timer;
+
   final isMainChat = true.obs;
   TextEditingController textController = TextEditingController();
   FocusNode focusNode = FocusNode();
@@ -17,7 +23,20 @@ class ChatController extends GetxController {
   final prompts = <Message>[].obs;
   final contents = <Message>[].obs;
 
+  void startTimer() {
+    countdown.value = 20;
+    isButtonEnabled.value = false;
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      countdown.value -= 1;
+      if (countdown.value <= 0) {
+        t.cancel();
+        isButtonEnabled.value = true;
+      }
+    });
+  }
+
   Future<void> submit() async {
+    startTimer();
     prompts.add(Message(role: 'user', content: textController.text));
     textController.clear();
 
@@ -34,6 +53,7 @@ class ChatController extends GetxController {
   }
 
   void refreshChat() async {// TODO - Refresh chat and get new content at any index
+    startTimer();
     // * - Refresh chat and get new content at last index
     _choices.removeLast();
     contents.removeLast();

@@ -31,6 +31,7 @@ class TimeCircularCountdown extends StatefulWidget {
     this.countdownCurrentColor,
     this.gapFactor = 6,
     this.strokeWidth,
+    this.text,
     this.textStyle,
     this.isClockwise = true,
     this.repeat,
@@ -103,6 +104,10 @@ class TimeCircularCountdown extends StatefulWidget {
   ///
   /// Default to [false].
   final bool? repeat;
+
+  /// The `Text` is use to display the center text in the countdown
+  /// Default value is `countdownRemaining`
+  final String? text;
 
   /// The `TextStyle` to use to display the `countdownRemaining` value
   /// in the center of the widget.
@@ -228,6 +233,7 @@ class _TimeCircularCountdownState extends State<TimeCircularCountdown> {
       countdownCurrentColor: widget.countdownCurrentColor,
       gapFactor: widget.gapFactor,
       strokeWidth: widget.strokeWidth,
+      text: widget.text,
       textStyle: widget.textStyle,
       isClockwise: widget.isClockwise,
     );

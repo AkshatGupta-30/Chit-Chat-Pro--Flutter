@@ -28,8 +28,13 @@ class BottomView extends StatelessWidget {
             onTapOutside: (event) => controller.focusNode.unfocus(),
           ),
           Gap(10),
-          ElevatedButton(
-            onPressed: () => (controller.isMainChat.value && controller.textController.text.isNotEmpty) ? controller.submit() : null,
+          ElevatedButton(// TODO - Manage in seperate widget
+            onPressed: () => (
+              controller.isMainChat.value &&
+              controller.textController.text.isNotEmpty &&
+              controller.isButtonEnabled.value) 
+                ? controller.submit()
+                : null,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
