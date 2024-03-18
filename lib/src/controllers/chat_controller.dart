@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:chit_chat_pro/src/model/choice.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:chit_chat_pro/src/model/request.dart';
@@ -25,7 +23,6 @@ class ChatController extends GetxController {
 
     ChatRequest chatRequest = ChatRequest(messages: prompts);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
-    jsonEncode(chatResponse.toMap()).toString().printInfo();
 
     _choices.addAll(chatResponse.choices);
     contents.add(_choices.last.message);
@@ -36,7 +33,18 @@ class ChatController extends GetxController {
     contents.removeAt(index);
   }
 
-  void refreshChat() async {} // TODO - Refresh chat and get new content
+  void refreshChat() async {// TODO - Refresh chat and get new content at any index
+    // * - Refresh chat and get new content at last index
+    _choices.removeLast();
+    contents.removeLast();
+    update();
+
+    ChatRequest chatRequest = ChatRequest(messages: prompts);
+    ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
+
+    _choices.addAll(chatResponse.choices);
+    contents.add(_choices.last.message);
+  }
 
   Future<void> copy(int index) async {
     String msgToCpoy = '${prompts[index].role.title()}\n${prompts[index].content}\n\n${prompts[index].role.title()}\n${contents[index].content}';

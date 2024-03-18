@@ -13,17 +13,10 @@ class ChatCompletionApi {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${dotenv.env['token']}',
     };
-    // final requestBody = jsonEncode({
-    //   'model': GPTmodel.turbo.toStr, // TODO : Dynamic model
-    //   'messages': [{"role": "user", "content": "Linear search in c++"}],
-    //   'max_tokens': maxTokens,
-    //   'temperature': temperatures,
-    // });
-    jsonEncode(chatRequest.toMap()).toString().printInfo();
 
     final response = await http.post(Uri.parse(chatUrl), headers: headers, body: jsonEncode(chatRequest.toMap()));
     if(response.statusCode != 200) {
-      "Open Ai Api\nStatus Code : ${response.statusCode}\nMessage : ${jsonDecode(response.body)['Message']['error']['message']}".printError();
+      "Open Ai Api\nStatus Code : ${response.statusCode}\nMessage : ${jsonDecode(response.body)}".printError();
       return {};
     }
     return jsonDecode(response.body);
