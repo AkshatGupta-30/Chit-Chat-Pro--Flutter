@@ -5,7 +5,7 @@ import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 class SpeechController extends GetxController {
-  final SpeechToText speechToText = SpeechToText();
+  final speechToText = SpeechToText().obs;
   final _chatController = Get.find<ChatController>();
   final speechEnabled = false.obs;
   final lastWords = ''.obs;
@@ -16,7 +16,7 @@ class SpeechController extends GetxController {
     _initSpeech();
   }
 
-  Future<void> _initSpeech() async => speechEnabled.value = await speechToText.initialize();
+  Future<void> _initSpeech() async => speechEnabled.value = await speechToText.value.initialize();
 
   void startListening(BuildContext context) async {
     if(!speechEnabled.value) {
@@ -24,13 +24,13 @@ class SpeechController extends GetxController {
         SnackBar(content: Text('You need to enable Micophone and Nearby Device permisiion to enable Speech to text feature'))
       );
     } else {
-      await speechToText.listen(onResult: _onSpeechResult);
+      await speechToText.value.listen(onResult: _onSpeechResult);
     }
     update();
   }
 
   void stopListening() async {
-    await speechToText.stop();
+    await speechToText.value.stop();
     update();
   }
 

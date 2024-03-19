@@ -45,6 +45,7 @@ class ChatController extends GetxController {
 
     _choices.addAll(chatResponse.choices);
     contents.add(_choices.last.message);
+    update();
   }
 
   void deletePromptContentSection(int index) {

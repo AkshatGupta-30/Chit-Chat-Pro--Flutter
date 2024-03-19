@@ -34,7 +34,7 @@ class ContentSection extends StatelessWidget {
           children: [
             SizedBox(width: 30,),
             Gap(5),
-            Expanded(child: Text(gptContent.content, style: Theme.of(context).primaryTextTheme.bodyLarge,))
+            Expanded(child: Text(gptContent.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),))
           ]
         )
       ],
