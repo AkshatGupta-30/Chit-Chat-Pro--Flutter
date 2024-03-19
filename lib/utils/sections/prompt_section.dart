@@ -3,16 +3,17 @@ import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/mdi.dart';
 import 'package:iconify_flutter_plus/icons/typcn.dart';
 import 'package:iconify_flutter_plus/icons/uiw.dart';
 
 class PromptSection extends StatelessWidget {
-  final ChatController controller;
   final int index;
-  PromptSection(this.controller, this.index, {super.key});
+  PromptSection(this.index, {super.key});
+
+  final controller = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {

@@ -41,11 +41,7 @@ class HomePage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 6),
       child: Column(
-        children: [
-          PromptView(controller),
-          Gap(20),
-          BottomView(controller)
-        ],
+        children: [PromptView(), Gap(20), BottomView(),],
       ),
     );
   }

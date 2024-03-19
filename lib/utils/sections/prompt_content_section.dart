@@ -3,11 +3,13 @@ import 'package:chit_chat_pro/utils/sections/content_section.dart';
 import 'package:chit_chat_pro/utils/sections/prompt_section.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class PromptContentSection extends StatelessWidget {
-  final ChatController controller;
   final int index;
-  PromptContentSection(this.controller, this.index, {super.key});
+  PromptContentSection(this.index, {super.key});
+
+  final controller = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +22,7 @@ class PromptContentSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(20)
       ),
       child: Column(
-        children: [
-          PromptSection(controller, index),
-          Gap(7), Divider(color: Colors.white54,), Gap(7),
-          ContentSection(controller, index)
-        ],
+        children: [PromptSection(index), Gap(7), Divider(color: Colors.white54,), Gap(7), ContentSection(index)],
       )
     );
   }

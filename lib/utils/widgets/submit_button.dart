@@ -8,7 +8,8 @@ import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
 class SubmitButtton extends StatelessWidget {
   SubmitButtton({super.key});
-  final ChatController controller = Get.find<ChatController>();
+
+  final controller = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PromptView extends StatelessWidget {
-  final ChatController controller;
-  PromptView(this.controller, {super.key});
+  PromptView({super.key});
+  
+  final controller = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class PromptView extends StatelessWidget {
       child: Obx(() => ListView.builder(
         itemCount: controller.contents.length,
         itemBuilder: (context, index) {
-          return PromptContentSection(controller, index);
+          return PromptContentSection(index);
         },
       ),
     ));

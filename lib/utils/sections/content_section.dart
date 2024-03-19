@@ -2,11 +2,13 @@ import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class ContentSection extends StatelessWidget {
-  final ChatController controller;
   final int index;
-  ContentSection(this.controller, this.index, {super.key});
+  ContentSection(this.index, {super.key});
+
+  final controller = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {

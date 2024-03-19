@@ -3,10 +3,12 @@ import 'package:chit_chat_pro/utils/widgets/mic_button.dart';
 import 'package:chit_chat_pro/utils/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class BottomView extends StatelessWidget {
-  final ChatController controller;
-  BottomView(this.controller, {super.key});
+  BottomView({super.key});
+
+  final controller = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {

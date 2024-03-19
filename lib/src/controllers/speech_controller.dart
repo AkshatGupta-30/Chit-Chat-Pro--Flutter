@@ -6,7 +6,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 
 class SpeechController extends GetxController {
   final SpeechToText speechToText = SpeechToText();
-  final ChatController _chatController = Get.find<ChatController>();
+  final _chatController = Get.find<ChatController>();
   final speechEnabled = false.obs;
   final lastWords = ''.obs;
 

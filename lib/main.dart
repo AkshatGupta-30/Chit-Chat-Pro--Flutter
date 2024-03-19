@@ -30,8 +30,12 @@ class MainApp extends StatelessWidget {
         ),
         actionIconTheme: ActionIconThemeData(
           closeButtonIconBuilder: (context) {
-            return CircleAvatar(
-              radius: 16, backgroundColor: Colors.grey.shade300,
+            return Container(
+              width: 30, height: 30,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(8)
+              ),
               child: Iconify(MaterialSymbols.close_rounded),
             );
           },

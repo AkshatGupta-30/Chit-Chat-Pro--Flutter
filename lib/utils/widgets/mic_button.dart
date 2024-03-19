@@ -8,7 +8,8 @@ import 'package:iconify_flutter_plus/icons/fa6_solid.dart';
 
 class MicButton extends StatelessWidget {
   MicButton({super.key});
-  final ChatController chatController = Get.find<ChatController>();
+
+  final chatController = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +21,7 @@ class MicButton extends StatelessWidget {
           child: Container(
             width: 60, height: 45,
             padding: EdgeInsets.symmetric(), alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: (chatController.isButtonEnabled.value) ? Color(0xFF2d6a4f) : Colors.grey.shade900,
-              borderRadius: BorderRadius.circular(45)
-            ),
+            decoration: BoxDecoration(color: Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
             child: (controller.speechToText.isNotListening)
                 ? Iconify(Fa6Solid.microphone_lines, size: 27, color: Colors.white,)
                 : SpinKitWave(color: Colors.white, size: 27, itemCount: 12, type: SpinKitWaveType.center,),
