@@ -18,6 +18,7 @@ dependencies:
   get: ^4.6.6
   http: ^1.2.1
   iconify_flutter_plus: ^1.0.3
+  speech_to_text: ^6.6.1
   super_string: ^1.0.3
 
 dev_dependencies:

@@ -1,4 +1,5 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:chit_chat_pro/utils/widgets/mic_button.dart';
 import 'package:chit_chat_pro/utils/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -27,7 +28,7 @@ class BottomView extends StatelessWidget {
             onTapOutside: (event) => controller.focusNode.unfocus(),
           ),
           Gap(10),
-          SubmitButtton(controller: controller),
+          Row(children: [SubmitButtton(), Gap(10), MicButton()],),
           Gap(10),
           Text(
             "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",
