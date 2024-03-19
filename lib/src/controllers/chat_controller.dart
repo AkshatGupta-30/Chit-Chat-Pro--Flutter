@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:chit_chat_pro/src/model/choice.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:chit_chat_pro/src/model/request.dart';
 import 'package:chit_chat_pro/src/model/response.dart';
@@ -18,8 +17,7 @@ class ChatController extends GetxController {
   final isMainChat = true.obs;
   TextEditingController textController = TextEditingController();
   FocusNode focusNode = FocusNode();
-  
-  final _choices = <Choice>[].obs;
+
   final prompts = <Message>[].obs;
   final contents = <Message>[].obs;
 
@@ -43,8 +41,7 @@ class ChatController extends GetxController {
     ChatRequest chatRequest = ChatRequest(messages: prompts);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
 
-    _choices.addAll(chatResponse.choices);
-    contents.add(_choices.last.message);
+    contents.add(chatResponse.choices.first.message);
     update();
   }
 
@@ -56,15 +53,12 @@ class ChatController extends GetxController {
   void refreshChat() async {// TODO - Refresh chat and get new content at any index
     startTimer();
     // * - Refresh chat and get new content at last index
-    _choices.removeLast();
     contents.removeLast();
     update();
 
     ChatRequest chatRequest = ChatRequest(messages: prompts);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
-
-    _choices.addAll(chatResponse.choices);
-    contents.add(_choices.last.message);
+    contents.add(chatResponse.choices.first.message);
   }
 
   Future<void> copy(int index) async {

@@ -1,4 +1,7 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:chit_chat_pro/src/model/request.dart';
+import 'package:chit_chat_pro/src/model/response.dart';
+import 'package:chit_chat_pro/src/services/chat_completion_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,13 +35,19 @@ class PCController extends GetxController {
     update();
   }
 
-  void confirm() {
+  Future<void> confirm() async {
     chatController.startTimer();
     editTapped();
-    // TODO - Api call
     if(chatController.prompts.last != chatController.prompts[index]) {// TODO - Create a linked list for this instead of removing
       chatController.prompts.removeRange(index+1, chatController.prompts.length);
       chatController.contents.removeRange(index+1, chatController.contents.length);
     }
+    update();
+
+    ChatRequest chatRequest = ChatRequest(messages: chatController.prompts);
+    ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
+    chatController.contents.insert(index, chatResponse.choices.first.message);
+    chatController.contents.removeAt(index+1);
+    _promptText.value = promtTextController.text;
   }
 }
