@@ -1,7 +1,9 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/mdi.dart';
 import 'package:iconify_flutter_plus/icons/typcn.dart';
@@ -30,9 +32,12 @@ class PromptSection extends StatelessWidget {
             ),
             Gap(4),
             if(controller.contents.length-1 == index) ...[
-              InkWell(// TODO - handle disabled button
-                onTap: () => (controller.isButtonEnabled.value) ? controller.refreshChat() : null,
-                child: Iconify(Typcn.refresh_outline, color: Colors.grey, size: 27,)
+              Obx(() => (controller.isButtonEnabled.value)
+                  ? InkWell(// TODO - handle disabled button
+                    onTap: () => (controller.isButtonEnabled.value) ? controller.refreshChat() : null,
+                    child: Iconify(Typcn.refresh_outline, color: Colors.grey, size: 27,)
+                  )
+                  : SpinKitRipple(color: Colors.grey, size: 27,),
               ),
               Gap(4),
             ],

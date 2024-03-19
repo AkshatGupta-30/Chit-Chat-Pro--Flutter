@@ -15,30 +15,38 @@ class HomePage extends StatelessWidget {
       init: ChatController(),
       builder: (controller) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Chit Chat Pro'),
-            actions: [
-              Obx(() => CircularCountdown(
-                diameter: 30, gapFactor: 5,
-                countdownTotal: 7, countdownRemaining: (controller.countdown.value / 3).floor(),
-                countdownTotalColor: Colors.grey, countdownCurrentColor: Colors.orangeAccent, countdownRemainingColor: Colors.red,
-                text: controller.countdown.value.toString(), textStyle: Theme.of(context).primaryTextTheme.bodySmall,
-              )),
-              Gap(10)
-            ],
-          ),
-          body: Container(
-            padding: EdgeInsets.only(top: 6),
-            child: Column(
-              children: [
-                PromptView(controller),
-                Gap(20),
-                BottomView(controller)
-              ],
-            ),
-          ),
+          appBar: _appBar(controller, context),
+          body: _body(controller),
         );
       }
+    );
+  }
+
+  AppBar _appBar(ChatController controller, BuildContext context) {
+    return AppBar(
+      title: Text('Chit Chat Pro'),
+      actions: [
+        Obx(() => CircularCountdown(
+          diameter: 30, gapFactor: 3,
+          countdownTotal: 21, countdownRemaining: controller.countdown.value,
+          countdownTotalColor: Colors.grey, countdownCurrentColor: Colors.orangeAccent,
+          countdownRemainingColor: Colors.red, textStyle: Theme.of(context).primaryTextTheme.bodySmall,
+        )),
+        Gap(10)
+      ],
+    );
+  }
+
+  Container _body(ChatController controller) {
+    return Container(
+      padding: EdgeInsets.only(top: 6),
+      child: Column(
+        children: [
+          PromptView(controller),
+          Gap(20),
+          BottomView(controller)
+        ],
+      ),
     );
   }
 }

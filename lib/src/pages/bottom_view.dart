@@ -1,8 +1,7 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:chit_chat_pro/utils/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
 class BottomView extends StatelessWidget {
   final ChatController controller;
@@ -28,22 +27,7 @@ class BottomView extends StatelessWidget {
             onTapOutside: (event) => controller.focusNode.unfocus(),
           ),
           Gap(10),
-          ElevatedButton(// TODO - Manage in seperate widget
-            onPressed: () => (
-              controller.isMainChat.value &&
-              controller.textController.text.isNotEmpty &&
-              controller.isButtonEnabled.value) 
-                ? controller.submit()
-                : null,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('Submit', style: Theme.of(context).primaryTextTheme.headlineSmall,),
-                Gap(2),
-                Iconify(MaterialSymbols.send_rounded, size: 32, color: Colors.white,)
-              ],
-            ),
-          ),
+          SubmitButtton(controller: controller),
           Gap(10),
           Text(
             "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",
