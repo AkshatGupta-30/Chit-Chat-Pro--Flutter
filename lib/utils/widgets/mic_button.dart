@@ -1,5 +1,5 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
-import 'package:chit_chat_pro/src/controllers/speech_controller.dart';
+import 'package:chit_chat_pro/src/controllers/speech_to_text_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,7 @@ class MicButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
-      init: SpeechController(),
+      init: SpeechToTextController(),
       builder: (controller) => Obx(() => InkWell(
           onTap: () => controller.speechToText.value.isNotListening ? controller.startListening(context) : controller.stopListening(),
           borderRadius: BorderRadius.circular(45),

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
-class SpeechController extends GetxController {
+class SpeechToTextController extends GetxController {
   final speechToText = SpeechToText().obs;
   final _chatController = Get.find<ChatController>();
   final speechEnabled = false.obs;
