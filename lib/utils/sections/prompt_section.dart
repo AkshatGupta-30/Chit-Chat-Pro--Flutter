@@ -1,5 +1,6 @@
 import 'package:chit_chat_pro/src/controllers/prompt_content_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
+import 'package:fluentui_emoji_icon/fluentui_emoji_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
@@ -34,7 +35,7 @@ class PromptSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CircleAvatar(radius: 15, backgroundColor: Colors.purpleAccent,), Gap(10),
+        FluentUiEmojiIcon(fl: Fluents.flBoy, w: 20, h: 20,), Gap(10),
         Text('You', style: Theme.of(context).primaryTextTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w800, fontSize: 22)),
         Spacer(),
         Obx(() => (controller.isReEdit.value)
@@ -76,7 +77,10 @@ class PromptSection extends StatelessWidget {
         SizedBox(width: 30,), Gap(5),
         Expanded(
           child: Obx(() => (!controller.isReEdit.value)
-              ? Text(userPrompt.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15))
+              ? SelectableText(
+                userPrompt.content,
+                style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15)
+              )
               : TextField(
                 controller: controller.promtTextController, focusNode: controller.focusNode,
                 minLines: 1, maxLines: null, enabled: true,

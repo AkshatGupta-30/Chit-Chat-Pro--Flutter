@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:chit_chat_pro/src/model/request.dart';
 import 'package:chit_chat_pro/src/model/response.dart';
+import 'package:chit_chat_pro/src/pages/detail_dialog.dart';
 import 'package:chit_chat_pro/src/services/chat_completion_api.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
@@ -64,5 +65,20 @@ class ChatController extends GetxController {
   Future<void> copy(int index) async {
     String msgToCpoy = '${prompts[index].role.title()}\n${prompts[index].content}\n\n${prompts[index].role.title()}\n${contents[index].content}';
     await FlutterClipboard.copy(msgToCpoy.replaceAll(r'\n', '\n'));
+  }
+
+  void showDetailDialog(BuildContext context, int index) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade400, width: 2),
+            borderRadius: BorderRadius.circular(20)
+          ),
+          child: ClipRRect(borderRadius: BorderRadius.circular(20), child: DetailDialog(index))
+        ),
+      ),
+    );
   }
 }

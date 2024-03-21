@@ -1,6 +1,7 @@
 import 'package:chit_chat_pro/src/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
 import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 
@@ -14,7 +15,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Chit Chat Pro',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -29,6 +30,9 @@ class MainApp extends StatelessWidget {
           ),
         ),
         actionIconTheme: ActionIconThemeData(
+          backButtonIconBuilder: (context) {
+            return Iconify(MaterialSymbols.arrow_back_rounded, color: Colors.white,);
+          },
           closeButtonIconBuilder: (context) {
             return Container(
               width: 30, height: 30,
@@ -39,6 +43,10 @@ class MainApp extends StatelessWidget {
               child: Iconify(MaterialSymbols.close_rounded),
             );
           },
+        ),
+        dialogBackgroundColor: Color(0xFF1A1A1A),
+        dialogTheme: DialogTheme(
+          surfaceTintColor: Colors.transparent,
         ),
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),

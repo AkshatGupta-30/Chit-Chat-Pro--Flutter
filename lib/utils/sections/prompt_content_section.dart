@@ -10,7 +10,7 @@ class PromptContentSection extends StatelessWidget {
   final int index;
   PromptContentSection(this.index, {super.key});
 
-  final controller = Get.find<ChatController>();
+  final chatController = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +18,20 @@ class PromptContentSection extends StatelessWidget {
       global: false,
       init: PCController(index),
       builder: (controller) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Color(0xFF212529),
-            border: Border.all(color: Colors.white24),
-            borderRadius: BorderRadius.circular(20)
+        return GestureDetector(
+          onDoubleTap: () => chatController.showDetailDialog(context, index),
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: Color(0xFF212529),
+              border: Border.all(color: Colors.white24),
+              borderRadius: BorderRadius.circular(20)
+            ),
+            child: Column(
+              children: [PromptSection(index, controller), Gap(7), Divider(color: Colors.white54,), Gap(7), ContentSection(index)],
+            )
           ),
-          child: Column(
-            children: [PromptSection(index, controller), Gap(7), Divider(color: Colors.white54,), Gap(7), ContentSection(index)],
-          )
         );
       }
     );
