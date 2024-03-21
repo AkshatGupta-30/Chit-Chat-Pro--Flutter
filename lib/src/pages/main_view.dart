@@ -2,6 +2,8 @@ import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/utils/sections/prompt_content_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/heroicons_solid.dart';
 
 class PromptView extends StatelessWidget {
   PromptView({super.key});
@@ -14,6 +16,7 @@ class PromptView extends StatelessWidget {
       child: Obx(() {
         if(controller.prompts.isEmpty) {
           return ListView.builder(
+            controller: controller.scrollController,
             itemCount: controller.emptyPrompts.length,
             itemBuilder: (context, index) {
               Map<String, String> question = controller.emptyPrompts[index];
@@ -37,11 +40,19 @@ class PromptView extends StatelessWidget {
             },
           );
         }
-        return ListView.builder(
-          itemCount: controller.prompts.length,
-          itemBuilder: (context, index) {
-            return PromptContentSection(index);
-          },
+        return Scaffold(
+          body: ListView.builder(
+            controller: controller.scrollController,
+            itemCount: controller.prompts.length,
+            itemBuilder: (context, index) {
+              return PromptContentSection(index);
+            },
+          ),
+          floatingActionButton: GestureDetector(
+            onTap: controller.autoScroll,
+            child: CircleAvatar(backgroundColor: Colors.cyanAccent, child: Iconify(HeroiconsSolid.chevron_up_down, size: 35),
+            )
+          ),
         );
       },
     ));

@@ -18,6 +18,7 @@ class ChatController extends GetxController {
   final isMainChat = true.obs;
   TextEditingController textController = TextEditingController();
   FocusNode focusNode = FocusNode();
+  final scrollController = ScrollController();
 
   final emptyPrompts = <Map<String, String>>[
     {"What is Flutter?" : "Definition and overview of the Flutter framework."},
@@ -44,6 +45,19 @@ class ChatController extends GetxController {
         isButtonEnabled.value = true;
       }
     });
+  }
+
+  void autoScroll() {
+    final double middlePosition = scrollController.position.maxScrollExtent / 2;
+    if (scrollController.offset > middlePosition) {
+      scrollController.animateTo(0, duration: Duration(milliseconds: 250), curve: Curves.easeInOut,);
+    } else {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: 250),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
   Future<void> submit({String? prompt}) async {
@@ -75,6 +89,7 @@ class ChatController extends GetxController {
     ChatRequest chatRequest = ChatRequest(messages: prompts);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
     contents.add(chatResponse.choices.first.message);
+    update();
   }
 
   Future<void> copy(int index) async {
@@ -95,5 +110,13 @@ class ChatController extends GetxController {
         ),
       ),
     );
+  }
+
+  @override
+  void onClose() {
+    textController.dispose();
+    scrollController.dispose();
+    timer!.cancel();
+    super.onClose();
   }
 }
