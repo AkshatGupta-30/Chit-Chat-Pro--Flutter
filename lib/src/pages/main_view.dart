@@ -12,7 +12,7 @@ class PromptView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Obx(() {
-        if(controller.contents.isEmpty) {
+        if(controller.prompts.isEmpty) {
           return ListView.builder(
             itemCount: controller.emptyPrompts.length,
             itemBuilder: (context, index) {
@@ -20,7 +20,7 @@ class PromptView extends StatelessWidget {
               String title = question.keys.first;
               String subtitle = question.values.first;
               return GestureDetector(
-                onTap: () => controller.emptySubmit('$title $subtitle'),
+                onTap: () => (controller.isButtonEnabled.value) ? controller.submit(prompt: '$title\n$subtitle') : null,
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
@@ -38,7 +38,7 @@ class PromptView extends StatelessWidget {
           );
         }
         return ListView.builder(
-          itemCount: controller.contents.length,
+          itemCount: controller.prompts.length,
           itemBuilder: (context, index) {
             return PromptContentSection(index);
           },

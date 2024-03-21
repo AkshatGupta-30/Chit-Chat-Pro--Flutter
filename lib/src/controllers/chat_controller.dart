@@ -20,15 +20,15 @@ class ChatController extends GetxController {
   FocusNode focusNode = FocusNode();
 
   final emptyPrompts = <Map<String, String>>[
-    {"What is Flutter?" : " Definition and overview of the Flutter framework."},
-    {"Programming Language in Flutter?" : " Clarification on the primary programming language used in Flutter."},
-    {"Flutter vs. Other Frameworks?" : " A comparison between Flutter and other frameworks like React Native."},
-    {"Flutter for Mobile Only?" : " Inquiry about the platforms supported by Flutter."},
-    {"Accessing Native Features in Flutter?" : " How Flutter apps interact with native platform features."},
-    {"State Management in Flutter?" : " Options and strategies for managing application state in Flutter."},
-    {"Scalability of Flutter?" : " Discussion on Flutter's suitability for large-scale applications."},
-    {"Flutter for Beginners?" : " Suitability of Flutter for newcomers to app development."},
-    {"Cost of Using Flutter?" : " Explanation of Flutter's licensing and cost."},
+    {"What is Flutter?" : "Definition and overview of the Flutter framework."},
+    {"Programming Language in Flutter?" : "Clarification on the primary programming language used in Flutter."},
+    {"Flutter vs. Other Frameworks?" : "A comparison between Flutter and other frameworks like React Native."},
+    {"Flutter for Mobile Only?" : "Inquiry about the platforms supported by Flutter."},
+    {"Accessing Native Features in Flutter?" : "How Flutter apps interact with native platform features."},
+    {"State Management in Flutter?" : "Options and strategies for managing application state in Flutter."},
+    {"Scalability of Flutter?" : "Discussion on Flutter's suitability for large-scale applications."},
+    {"Flutter for Beginners?" : "Suitability of Flutter for newcomers to app development."},
+    {"Cost of Using Flutter?" : "Explanation of Flutter's licensing and cost."},
   ].obs;
 
   final prompts = <Message>[].obs;
@@ -46,21 +46,15 @@ class ChatController extends GetxController {
     });
   }
 
-  Future<void> submit() async {
+  Future<void> submit({String? prompt}) async {
     startTimer();
-    prompts.add(Message(role: 'user', content: textController.text));
-    textController.clear();
+    if(prompt == null) {
+      prompts.add(Message(role: 'user', content: textController.text));
+      textController.clear();
+    } else {
+      prompts.add(Message(role: 'user', content: prompt));
+    }
 
-    ChatRequest chatRequest = ChatRequest(messages: prompts);
-    ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
-
-    contents.add(chatResponse.choices.first.message);
-    update();
-  }
-
-  Future<void> emptySubmit(String message) async {
-    startTimer();
-    prompts.add(Message(role: 'user', content: message));
     ChatRequest chatRequest = ChatRequest(messages: prompts);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
     contents.add(chatResponse.choices.first.message);

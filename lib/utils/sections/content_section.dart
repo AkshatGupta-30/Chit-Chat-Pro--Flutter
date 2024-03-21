@@ -1,7 +1,9 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:fluentui_emoji_icon/fluentui_emoji_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
@@ -15,7 +17,7 @@ class ContentSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Message gptContent = controller.contents[index];
+    Message? gptContent = (index < controller.contents.length) ? controller.contents[index] : null;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -40,19 +42,30 @@ class ContentSection extends StatelessWidget {
             ),
           ]
         ),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            SizedBox(width: 30,),
-            Gap(10),
-            Expanded(
-              child: SelectableText(
-                gptContent.content,
-                style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
-              ),
-            ),
-          ]
-        )
+        (gptContent != null)
+            ?  Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SizedBox(width: 30,),
+                Gap(10),
+                Expanded(
+                  child: AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        gptContent.content, speed: Duration(milliseconds: 20),
+                        textStyle: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+                      ),
+                    ],
+                    repeatForever: false, totalRepeatCount: 1, isRepeatingAnimation: false,
+                    displayFullTextOnTap: true,
+                  ),
+                )
+              ]
+            )
+            : Padding(
+              padding: EdgeInsets.all(10),
+              child: SpinKitThreeBounce(color: Theme.of(context).primaryTextTheme.bodyLarge!.color, size: 25,),
+            )
       ],
     );
   }
