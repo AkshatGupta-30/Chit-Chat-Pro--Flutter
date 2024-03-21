@@ -11,12 +11,39 @@ class PromptView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Obx(() => ListView.builder(
-        itemCount: controller.contents.length,
-        itemBuilder: (context, index) {
-          return PromptContentSection(index);
-        },
-      ),
+      child: Obx(() {
+        if(controller.contents.isEmpty) {
+          return ListView.builder(
+            itemCount: controller.emptyPrompts.length,
+            itemBuilder: (context, index) {
+              Map<String, String> question = controller.emptyPrompts[index];
+              String title = question.keys.first;
+              String subtitle = question.values.first;
+              return GestureDetector(
+                onTap: () => controller.emptySubmit('$title $subtitle'),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade900,
+                    border: Border.all(color: Colors.grey.shade600),
+                    borderRadius: BorderRadius.circular(15)
+                  ),
+                  child: ListTile(
+                    title: Text(title),
+                    subtitle: Text(subtitle),
+                  ),
+                ),
+              );
+            },
+          );
+        }
+        return ListView.builder(
+          itemCount: controller.contents.length,
+          itemBuilder: (context, index) {
+            return PromptContentSection(index);
+          },
+        );
+      },
     ));
   }
 }

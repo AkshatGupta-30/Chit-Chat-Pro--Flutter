@@ -69,7 +69,11 @@ class MainApp extends StatelessWidget {
             fixedSize: MaterialStatePropertyAll(Size(double.maxFinite, 20)),
             backgroundColor: MaterialStatePropertyAll(Color(0xFF2d6a4f)),
           )
-        )
+        ),
+        listTileTheme: ListTileThemeData(
+          titleTextStyle: TextStyle(color: Colors.grey.shade200, fontSize: 18, fontFamily: 'LovelyMamma', fontWeight: FontWeight.w300),
+          subtitleTextStyle: TextStyle(color: Colors.grey, fontSize: 14, fontFamily: 'LovelyMamma',),
+        ),
       ),
       home: HomePage()
     );
