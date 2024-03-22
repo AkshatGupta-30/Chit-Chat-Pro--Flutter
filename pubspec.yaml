@@ -18,12 +18,13 @@ dependencies:
     sdk: flutter
   flutter_dotenv: ^5.1.0
   flutter_spinkit: ^5.2.0
+  flutter_tts: ^4.0.1
   gap: ^3.0.1
   get: ^4.6.6
   http: ^1.2.1
   iconify_flutter_plus: ^1.0.3
   sliver_tools: ^0.2.12
-  speech_to_text: ^6.6.1
+  speech_to_text: ^6.6.0
   super_string: ^1.0.3
   text_to_speech:
     path: packages/text_to_speech/

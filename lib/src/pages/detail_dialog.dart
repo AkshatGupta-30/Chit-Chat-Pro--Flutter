@@ -1,4 +1,4 @@
-import 'package:chit_chat_pro/src/controllers/detail_controller.dart';
+import 'package:chit_chat_pro/src/controllers/text_to_speech_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:fluentui_emoji_icon/fluentui_emoji_icon.dart';
@@ -18,7 +18,7 @@ class DetailDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder(
       global: false,
-      init: DetailController(index),
+      init: TTSController(index),
       builder: (controller) {
         Message userPrompt = controller.chatController.prompts[index];
         Message gptMessage = controller.chatController.contents[index];
@@ -93,7 +93,7 @@ class DetailDialog extends StatelessWidget {
           ),
           bottomNavigationBar: Container(
             width: double.maxFinite, height: kBottomNavigationBarHeight, color: Colors.grey.shade800,
-            child: Row(
+            child: Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 InkWell(
@@ -101,12 +101,17 @@ class DetailDialog extends StatelessWidget {
                   child: Iconify(MaterialSymbols.skip_previous_rounded, color: Colors.blue, size: 40,)
                 ),
                 InkWell(
-                  onTap: () => controller.tts.speak(),
-                  child: Iconify(MaterialSymbols.play_arrow_rounded, color: Colors.lightGreenAccent, size: 45,), // TODO - Play/Pause(MaterialSymbols.pause_rounded/MaterialSymbols.play_arrow_rounded)
+                  onTap: () => controller.playPauseTapped(),
+                  child: Iconify( // TODO - Play/Pause(MaterialSymbols.pause_rounded/MaterialSymbols.play_arrow_rounded)
+                    (controller.isPlaying.value) ? MaterialSymbols.pause_rounded : MaterialSymbols.play_arrow_rounded,
+                    color: Colors.lightGreenAccent, size: 45,
+                  ),
                 ),
                 InkWell(
-                  onTap: () {},
-                  child: Iconify(MaterialSymbols.stop_circle_rounded, color: Colors.redAccent, size: 45,),
+                  onTap: () => controller.stop(),
+                  child: Iconify(MaterialSymbols.stop_circle_rounded, size: 45,
+                  color: (controller.isStopped.value) ? Colors.white : Colors.redAccent,
+                ),
                 ),
                 InkWell(
                   onTap: () {},
@@ -115,7 +120,7 @@ class DetailDialog extends StatelessWidget {
               ],
             ),
           ),
-        );
+        ));
       }
     );
   }
