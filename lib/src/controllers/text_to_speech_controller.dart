@@ -1,57 +1,45 @@
-import 'dart:io';
-
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:flutter_tts/flutter_tts_web.dart';
+import 'package:text_to_speech/text_to_speech.dart';
 import 'package:get/get.dart';
 
-class TextToSpeechController extends GetxController {
-  late FlutterTts flutterTts;
-  TtsState ttsState = TtsState.stopped;
-  
+class TTSController extends GetxController {
+  final String text;
+  TTSController(this.text);
+
+  TextToSpeech tts = TextToSpeech();
+  final double _volume = 1; //? Range: 0-1
+  final double _rate = 1.0; //? Range: 0-2
+  final double _pitch = 1.0; //? Range: 0-2
+
+  late final _languageCode = ''.obs;
+  late final voice = ''.obs;
+
   @override
   void onInit() {
     super.onInit();
-    initTts();
+    _getVoice();
+    _getLangCode();
+    _setTTS();
   }
-  
-  void initTts() async {
-    flutterTts = FlutterTts();
-    _setAwaitOptions();
-    if (Platform.isAndroid) {
-      await flutterTts.getDefaultEngine;
-      await flutterTts.getDefaultVoice;
+
+  Future<void> _getVoice() async {
+    final String? defaultLangCode = await tts.getDefaultLanguage();
+    final List<String>? voices = await tts.getVoiceByLang(defaultLangCode!);
+    if (voices != null && voices.isNotEmpty) {
+      voice.value = voices.first;
     }
-
-    flutterTts.setStartHandler(() {
-      "Playing".printInfo();
-      ttsState = TtsState.playing;
-    });
-
-    flutterTts.setCompletionHandler(() {
-      "Complete".printInfo();
-      ttsState = TtsState.stopped;
-    });
-
-    flutterTts.setCancelHandler(() {
-      "Cancel".printInfo();
-      ttsState = TtsState.stopped;
-    });
-
-    flutterTts.setPauseHandler(() {
-      "Paused".printInfo();
-      ttsState = TtsState.paused;
-    });
-
-    flutterTts.setContinueHandler(() {
-      "Continued".printInfo();
-      ttsState = TtsState.continued;
-    });
-
-    flutterTts.setErrorHandler((msg) {
-      "error: $msg".printInfo();
-      ttsState = TtsState.stopped;
-    });
   }
 
-  Future _setAwaitOptions() async => await flutterTts.awaitSpeakCompletion(true);
+  Future<void> _getLangCode() async => _languageCode.value = (await tts.getDefaultLanguage())!;
+
+  void _setTTS() {
+    tts.setVolume(_volume);
+    tts.setRate(_rate);
+    tts.setLanguage(_languageCode.value);
+    tts.setPitch(_pitch);
+  }
+
+  void speak() => tts.speak(text);
+  void pause() => tts.pause();
+  void resume() => tts.resume();
+  void stop() => tts.stop();
 }

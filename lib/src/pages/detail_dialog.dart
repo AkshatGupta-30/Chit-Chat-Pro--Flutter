@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
+import 'package:iconify_flutter_plus/icons/material_symbols.dart';
 import 'package:iconify_flutter_plus/icons/uiw.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -16,6 +17,7 @@ class DetailDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder(
+      global: false,
       init: DetailController(index),
       builder: (controller) {
         Message userPrompt = controller.chatController.prompts[index];
@@ -25,6 +27,7 @@ class DetailDialog extends StatelessWidget {
           body: Container(
             padding: EdgeInsets.all(15),
             child: CustomScrollView(
+              shrinkWrap: true,
               slivers: [
                 SliverAppBar(
                   pinned: true,
@@ -82,17 +85,36 @@ class DetailDialog extends StatelessWidget {
                     Gap(8),
                   ],
                 ),
-                // SliverPinnedHeader(child: Container(color: Color(0xFF1A1A1A), child: Divider(color: Colors.white54,)),),
                 SliverToBoxAdapter(
-                  child: SelectableText(
-                    '${gptMessage.content}${gptMessage.content}${gptMessage.content}${gptMessage.content}${gptMessage.content}${gptMessage.content}${gptMessage.content}${gptMessage.content}${gptMessage.content}',
-                    style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
-                  ),
+                  child: SelectableText(gptMessage.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),),
                 ),
               ],
             ),
           ),
-          bottomNavigationBar: Container(height: kBottomNavigationBarHeight, width: double.maxFinite, color: Colors.grey.shade800,), // TODO - Text to speech buttons
+          bottomNavigationBar: Container(
+            width: double.maxFinite, height: kBottomNavigationBarHeight, color: Colors.grey.shade800,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Iconify(MaterialSymbols.skip_previous_rounded, color: Colors.blue, size: 40,)
+                ),
+                InkWell(
+                  onTap: () => controller.tts.speak(),
+                  child: Iconify(MaterialSymbols.play_arrow_rounded, color: Colors.lightGreenAccent, size: 45,), // TODO - Play/Pause(MaterialSymbols.pause_rounded/MaterialSymbols.play_arrow_rounded)
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Iconify(MaterialSymbols.stop_circle_rounded, color: Colors.redAccent, size: 45,),
+                ),
+                InkWell(
+                  onTap: () {},
+                  child: Iconify(MaterialSymbols.skip_next_rounded, color: Colors.blue, size: 40,)
+                )
+              ],
+            ),
+          ),
         );
       }
     );
