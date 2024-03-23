@@ -11,27 +11,28 @@ class TTSController extends GetxController {
   final chatController = Get.find<ChatController>();
   FlutterTts flutterTts = FlutterTts();
   String _text = '';
+  late Rx<int?> currentWordStart = 0.obs;
+  late Rx<int?> currentWordEnd = 0.obs;
 
   final double _volume = 1; //? Range: 0-1
   final double _rate = 1; //? Range: 0-2
   final double _pitch = 1.0; //? Range: 0-2
-  bool isCurrentLanguageInstalled = false;
 
   final isPlaying = false.obs;
-  final isStopped = true.obs;
+  final canStopped = false.obs;
 
   @override
   void onInit() {
     super.onInit();
     initDetail();
-    initTts();
+    initTTS();
   }
 
-  void initDetail() => _text = chatController.contents[index].content;
+  void initDetail() {
+    _text = chatController.contents[index].content;
+  }
 
-  Future<void> initTts() async {
-    flutterTts = FlutterTts();
-
+  Future<void> initTTS() async {
     _setAwaitOptions();
     if (Platform.isAndroid) {
       _getDefaultEngine();
@@ -42,10 +43,45 @@ class TTSController extends GetxController {
     await flutterTts.setEngine('com.google.android.tts');
     await flutterTts.setLanguage('en-IN');
 
-    flutterTts.setCompletionHandler(() {
-      "Complete".printInfo();
-      isStopped.value = true;
+    flutterTts.setProgressHandler((text, start, end, word) {
+      currentWordStart.value = start;
+      currentWordEnd.value = end;
+      update();
+    });
+
+    flutterTts.setStartHandler(() {
+      isPlaying.value = true;
+      canStopped.value = true;
+      update();
+    });
+
+    flutterTts.setPauseHandler(() {
       isPlaying.value = false;
+      canStopped.value = true;
+      update();
+    });
+
+    flutterTts.setContinueHandler(() {
+      isPlaying.value = true;
+      canStopped.value = true;
+      update();
+    });
+
+    flutterTts.setCancelHandler(() {
+      isPlaying.value = false;
+      canStopped.value = false;
+
+      currentWordStart.value = 0;
+      currentWordEnd.value = 0;
+      update();
+    });
+
+    flutterTts.setCompletionHandler(() {
+      canStopped.value = false;
+      isPlaying.value = false;
+
+      currentWordStart.value = 0;
+      currentWordEnd.value = 0;
       update();
     });
 
@@ -70,7 +106,7 @@ class TTSController extends GetxController {
   Future<void> pause() async => await flutterTts.pause();
   Future<void> stop() async => await flutterTts.stop().then((value) {
     isPlaying.value = false;
-    isStopped.value = true;
+    canStopped.value = false;
   });
 
   void playPauseTapped() async {
@@ -78,7 +114,7 @@ class TTSController extends GetxController {
       await pause().then((value) => isPlaying.value = false);
     } else {
       isPlaying.value = true;
-      isStopped.value = false;
+      canStopped.value = true;
       await speak();
     }
   }

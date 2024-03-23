@@ -86,7 +86,21 @@ class DetailDialog extends StatelessWidget {
                   ],
                 ),
                 SliverToBoxAdapter(
-                  child: SelectableText(gptMessage.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),),
+                  child: RichText(
+                    text: TextSpan(
+                      style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+                      children: [
+                        TextSpan(text: gptMessage.content.substring(0, controller.currentWordStart.value)),
+                        if(controller.currentWordStart.value != null)
+                          TextSpan(
+                            text: gptMessage.content.substring(controller.currentWordStart.value!, controller.currentWordEnd.value),
+                            style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15, color: Colors.green),
+                          ),
+                        if(controller.currentWordEnd.value != null)
+                          TextSpan(text: gptMessage.content.substring(controller.currentWordEnd.value!),),
+                      ]
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -110,7 +124,7 @@ class DetailDialog extends StatelessWidget {
                 InkWell(
                   onTap: () => controller.stop(),
                   child: Iconify(MaterialSymbols.stop_circle_rounded, size: 45,
-                  color: (controller.isStopped.value) ? Colors.white : Colors.redAccent,
+                  color: (controller.canStopped.value) ? Colors.redAccent : Colors.white,
                 ),
                 ),
                 InkWell(
