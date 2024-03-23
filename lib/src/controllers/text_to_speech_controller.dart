@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
@@ -11,15 +12,27 @@ class TTSController extends GetxController {
   final chatController = Get.find<ChatController>();
   FlutterTts flutterTts = FlutterTts();
   String _text = '';
-  late Rx<int?> currentWordStart = 0.obs;
-  late Rx<int?> currentWordEnd = 0.obs;
 
   final double _volume = 1; //? Range: 0-1
-  final double _rate = 1; //? Range: 0-2
+  final rate = 1.0.obs;
   final double _pitch = 1.0; //? Range: 0-2
 
   final isPlaying = false.obs;
   final canStopped = false.obs;
+
+  List<DropdownMenuItem<double>> get dropdownItems{
+    List<DropdownMenuItem<double>> menuItems = [
+      DropdownMenuItem(value: 0.25, child: Text('0.25x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 0.5, child: Text('0.5x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 0.75, child: Text('0.75x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 1, child: Text('1x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 1.25, child: Text('1.25x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 1.5, child: Text('1.5x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 1.75, child: Text('1.75x', style: TextStyle(color: Colors.white),)),
+      DropdownMenuItem(value: 2, child: Text('2x', style: TextStyle(color: Colors.white),)),
+    ];
+    return menuItems;
+  }
 
   @override
   void onInit() {
@@ -28,9 +41,7 @@ class TTSController extends GetxController {
     initTTS();
   }
 
-  void initDetail() {
-    _text = chatController.contents[index].content;
-  }
+  void initDetail() => _text = chatController.contents[index].content;
 
   Future<void> initTTS() async {
     _setAwaitOptions();
@@ -42,12 +53,6 @@ class TTSController extends GetxController {
 
     await flutterTts.setEngine('com.google.android.tts');
     await flutterTts.setLanguage('en-IN');
-
-    flutterTts.setProgressHandler((text, start, end, word) {
-      currentWordStart.value = start;
-      currentWordEnd.value = end;
-      update();
-    });
 
     flutterTts.setStartHandler(() {
       isPlaying.value = true;
@@ -70,18 +75,12 @@ class TTSController extends GetxController {
     flutterTts.setCancelHandler(() {
       isPlaying.value = false;
       canStopped.value = false;
-
-      currentWordStart.value = 0;
-      currentWordEnd.value = 0;
       update();
     });
 
     flutterTts.setCompletionHandler(() {
       canStopped.value = false;
       isPlaying.value = false;
-
-      currentWordStart.value = 0;
-      currentWordEnd.value = 0;
       update();
     });
 
@@ -96,9 +95,15 @@ class TTSController extends GetxController {
 
   Future<void> _getDefaultVoice() async => await flutterTts.getDefaultVoice;
 
+  Future<void> changeRate(double newValue) async {
+    rate.value = newValue;
+    await flutterTts.setSpeechRate(newValue);
+    update();
+  }
+
   Future<void> _configureTTS() async {
     await flutterTts.setVolume(_volume);
-    await flutterTts.setSpeechRate(_rate);
+    await flutterTts.setSpeechRate(rate.value);
     await flutterTts.setPitch(_pitch);
   }
 
