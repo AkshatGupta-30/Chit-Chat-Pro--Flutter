@@ -5,6 +5,7 @@ import 'package:chit_chat_pro/src/model/request.dart';
 import 'package:chit_chat_pro/src/model/response.dart';
 import 'package:chit_chat_pro/src/pages/detail_dialog.dart';
 import 'package:chit_chat_pro/src/services/chat_completion_api.dart';
+import 'package:chit_chat_pro/utils/enums/finish_reason.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,8 @@ class ChatController extends GetxController {
 
   final prompts = <Message>[].obs;
   final contents = <Message>[].obs;
+  final finishReasons = <FinishReason>[].obs;
+  final isAnimated = <bool>[].obs;
 
   void startTimer() {
     countdown.value = 20;
@@ -72,23 +75,29 @@ class ChatController extends GetxController {
     ChatRequest chatRequest = ChatRequest(messages: prompts);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
     contents.add(chatResponse.choices.first.message);
+    isAnimated.add(false);
+    finishReasons.add(chatResponse.choices.first.finishReason);
     update();
   }
 
   void deletePromptContentSection(int index) {
     prompts.removeAt(index);
     contents.removeAt(index);
+    isAnimated.removeAt(index);
   }
 
   void refreshChat() async {// TODO - Refresh chat and get new content at any index
     startTimer();
     // * - Refresh chat and get new content at last index
     contents.removeLast();
+    isAnimated.removeLast();
     update();
 
-    ChatRequest chatRequest = ChatRequest(messages: prompts);
+    ChatRequest chatRequest = ChatRequest(messages: prompts, maxTokens: 500);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
     contents.add(chatResponse.choices.first.message);
+    finishReasons.add(chatResponse.choices.first.finishReason);
+    isAnimated.add(false);
     update();
   }
 

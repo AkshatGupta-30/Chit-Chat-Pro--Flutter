@@ -36,10 +36,11 @@ class ContentSection extends StatelessWidget {
               )
             ),
             Spacer(),
-            InkWell(
-              onTap: () => controller.showDetailDialog(context, index),
-              child: Iconify(RadixIcons.open_in_new_window, color: Colors.grey,)
-            ),
+            if(gptContent != null)
+              InkResponse(
+                onTap: () => controller.showDetailDialog(context, index),
+                child: Iconify(RadixIcons.open_in_new_window, color: Colors.grey,)
+              ),
           ]
         ),
         (gptContent != null)
@@ -49,16 +50,19 @@ class ContentSection extends StatelessWidget {
                 SizedBox(width: 30,),
                 Gap(10),
                 Expanded(
-                  child: AnimatedTextKit(
-                    animatedTexts: [
-                      TypewriterAnimatedText(
-                        gptContent.content, speed: Duration(milliseconds: 20),
-                        textStyle: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+                  child: (controller.isAnimated[index])
+                      ? SelectableText(gptContent.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),)
+                      : AnimatedTextKit(
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            gptContent.content, speed: Duration(milliseconds: 20),
+                            textStyle: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+                          ),
+                        ],
+                        repeatForever: false, totalRepeatCount: 1, isRepeatingAnimation: false,
+                        displayFullTextOnTap: true,
+                        onFinished: () => controller.isAnimated[index] = true,
                       ),
-                    ],
-                    repeatForever: false, totalRepeatCount: 1, isRepeatingAnimation: false,
-                    displayFullTextOnTap: true,
-                  ),
                 )
               ]
             )

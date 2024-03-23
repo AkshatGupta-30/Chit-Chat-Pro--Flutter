@@ -23,7 +23,7 @@ class ChatRequest {
     return {
       'model': (model == null) ? GPTmodel.turbo.toStr : model!.toStr,
       'messages': messagesJson,
-      'max_tokens': maxTokens ?? 50,
+      'max_tokens': maxTokens ?? 500,
       'temperature': temperatures ?? 0.7,
     };
   }
