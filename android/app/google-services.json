@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "902413232801",
+    "project_id": "chit-chat-pro--flutter",
+    "storage_bucket": "chit-chat-pro--flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902413232801:android:599a8c8cf7109630d9dee0",
+        "android_client_info": {
+          "package_name": "com.example.chit_chat_pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902413232801-6rqv1p72b1fivj694b0e8qq14rp3lr48.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChswJehJ87vc52Pi-U8meCW-zblyG_yHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902413232801-6rqv1p72b1fivj694b0e8qq14rp3lr48.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
