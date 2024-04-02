@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/radix_icons.dart';
+import 'package:iconify_flutter/iconify.dart';
 
 class ContentSection extends StatelessWidget {
   final int index;

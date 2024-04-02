@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/material_symbols.dart';
+import 'package:iconify_flutter/iconify.dart';
 
 class SubmitButtton extends StatelessWidget {
   SubmitButtton({super.key});

@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/bx.dart';
-import 'package:iconify_flutter_plus/icons/mdi.dart';
-import 'package:iconify_flutter_plus/icons/typcn.dart';
-import 'package:iconify_flutter_plus/icons/uiw.dart';
+import 'package:iconify_flutter/iconify.dart';
 
 class PromptSection extends StatelessWidget {
   final int index;

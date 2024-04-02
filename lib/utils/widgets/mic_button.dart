@@ -3,8 +3,7 @@ import 'package:chit_chat_pro/src/controllers/speech_to_text_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/fa6_solid.dart';
+import 'package:iconify_flutter/iconify.dart';
 
 class MicButton extends StatelessWidget {
   MicButton({super.key});

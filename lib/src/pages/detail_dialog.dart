@@ -5,9 +5,7 @@ import 'package:fluentui_emoji_icon/fluentui_emoji_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/material_symbols.dart';
-import 'package:iconify_flutter_plus/icons/uiw.dart';
+import 'package:iconify_flutter/iconify.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class DetailDialog extends StatelessWidget {

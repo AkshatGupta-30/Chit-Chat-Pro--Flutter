@@ -23,7 +23,8 @@ dependencies:
   gap: ^3.0.1
   get: ^4.6.6
   http: ^1.2.1
-  iconify_flutter_plus: ^1.0.3
+  iconify_flutter: 
+    path: packages/iconify_flutter_plus/
   sliver_tools: ^0.2.12
   speech_to_text: ^6.6.0
   super_string: ^1.0.3

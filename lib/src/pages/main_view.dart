@@ -2,8 +2,7 @@ import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/utils/sections/prompt_content_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter_plus/iconify_flutter_plus.dart';
-import 'package:iconify_flutter_plus/icons/heroicons_solid.dart';
+import 'package:iconify_flutter/iconify.dart';
 
 class PromptView extends StatelessWidget {
   PromptView({super.key});
