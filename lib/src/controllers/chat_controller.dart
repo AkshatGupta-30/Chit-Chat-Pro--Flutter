@@ -8,6 +8,7 @@ import 'package:chit_chat_pro/src/services/chat_completion_api.dart';
 import 'package:chit_chat_pro/utils/enums/finish_reason.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:super_string/super_string.dart';
 
@@ -19,6 +20,10 @@ class ChatController extends GetxController {
   final isMainChat = true.obs;
   TextEditingController textController = TextEditingController();
   FocusNode focusNode = FocusNode();
+
+  final fabVisible = false.obs;
+  final isScrollAbove = false.obs;
+  Timer? _hideTimer;
   final scrollController = ScrollController();
 
   final emptyPrompts = <Map<String, String>>[
@@ -38,6 +43,23 @@ class ChatController extends GetxController {
   final finishReasons = <FinishReason>[].obs;
   final isAnimated = <bool>[].obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    scrollController.addListener(() {
+      if (scrollController.position.isScrollingNotifier.value) {
+        fabVisible.value = true;
+        if(scrollController.position.userScrollDirection == ScrollDirection.forward) {
+          isScrollAbove.value = true;
+        } else if(scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+          isScrollAbove.value = false;
+        }
+        _hideTimer?.cancel();
+        _hideTimer = Timer(Duration(seconds: 2), () => fabVisible.value = false);
+      }
+    });
+  }
+
   void startTimer() {
     countdown.value = 20;
     isButtonEnabled.value = false;
@@ -50,18 +72,9 @@ class ChatController extends GetxController {
     });
   }
 
-  void autoScroll() {
-    final double middlePosition = scrollController.position.maxScrollExtent / 2;
-    if (scrollController.offset > middlePosition) {
-      scrollController.animateTo(0, duration: Duration(milliseconds: 250), curve: Curves.easeInOut,);
-    } else {
-      scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 250),
-        curve: Curves.easeInOut,
-      );
-    }
-  }
+  void scrollUp() => scrollController.animateTo(0, duration: Duration(milliseconds: 250), curve: Curves.easeInOut,);
+
+  void scrollDown() =>  scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 250), curve: Curves.easeInOut);
 
   Future<void> submit({String? prompt}) async {
     startTimer();
@@ -119,6 +132,13 @@ class ChatController extends GetxController {
         ),
       ),
     );
+  }
+
+  bool onNotification(UserScrollNotification notification) {
+    final ScrollDirection direction = notification.direction;
+    if (direction == ScrollDirection.reverse) fabVisible.value = false;
+    else if (direction == ScrollDirection.forward) fabVisible.value = true;
+    return true;
   }
 
   @override

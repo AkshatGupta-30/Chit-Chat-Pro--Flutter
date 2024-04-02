@@ -48,13 +48,21 @@ class PromptView extends StatelessWidget {
               return PromptContentSection(index);
             },
           ),
-          floatingActionButton: GestureDetector(
-            onTap: controller.autoScroll,
-            child: CircleAvatar(backgroundColor: Colors.cyanAccent, child: Iconify(HeroiconsSolid.chevron_up_down, size: 35),
-            )
+          floatingActionButton: AnimatedSlide(
+            offset: (controller.fabVisible.value) ? Offset.zero : Offset(2,0),
+            duration: Duration(milliseconds: 300),
+            child: AnimatedOpacity(
+              duration: Duration(milliseconds: 300),
+              opacity: (controller.fabVisible.value) ? 1 : 0,
+              child: FloatingActionButton(
+                onPressed: (controller.isScrollAbove.value) ? controller.scrollUp : controller.scrollDown,
+                backgroundColor: Colors.cyanAccent, shape: CircleBorder(),
+                child: Iconify((controller.isScrollAbove.value) ? HeroiconsSolid.chevron_up : HeroiconsSolid.chevron_down, size: 40)
+              ),
+            ),
           ),
         );
       },
-    ));
+          ));
   }
 }

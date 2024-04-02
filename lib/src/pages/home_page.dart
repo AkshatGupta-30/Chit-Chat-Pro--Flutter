@@ -37,12 +37,9 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Container _body(ChatController controller) {
-    return Container(
-      padding: EdgeInsets.only(top: 6),
-      child: Column(
-        children: [PromptView(), Gap(20), BottomView(),],
-      ),
+  Column _body(ChatController controller) {
+    return Column(
+      children: [Gap(12), PromptView(), Gap(2), BottomView(),],
     );
   }
 }
