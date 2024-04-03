@@ -1,4 +1,5 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:chit_chat_pro/utils/widgets/image_button.dart';
 import 'package:chit_chat_pro/utils/widgets/mic_button.dart';
 import 'package:chit_chat_pro/utils/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +13,16 @@ class BottomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    final media = MediaQuery.sizeOf(context);
+    return Container(
+      width: media.width,
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
           TextField(
-            controller: controller.textController,
-            focusNode: controller.focusNode,
-            textInputAction: TextInputAction.newline,
-            keyboardType: TextInputType.multiline,
-            minLines: 1, maxLines: 6,
-            style: Theme.of(context).primaryTextTheme.bodyLarge,
+            controller: controller.textController, focusNode: controller.focusNode,
+            textInputAction: TextInputAction.newline, keyboardType: TextInputType.multiline,
+            minLines: 1, maxLines: 6, style: Theme.of(context).primaryTextTheme.bodyLarge,
             decoration: InputDecoration(
               hintText: "Share your thoughts with us.",
               suffixIcon: CloseButton(onPressed: () => controller.textController.clear(),)
@@ -30,7 +30,7 @@ class BottomView extends StatelessWidget {
             onTapOutside: (event) => controller.focusNode.unfocus(),
           ),
           Gap(10),
-          Row(children: [SubmitButtton(), Gap(10), MicButton()],),
+          Row(children: [SubmitButtton(), Gap(5), ImageButton(), Gap(5), MicButton()]),
           Gap(10),
           Text(
             "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",

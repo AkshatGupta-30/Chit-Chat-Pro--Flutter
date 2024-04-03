@@ -18,12 +18,11 @@ class MicButton extends StatelessWidget {
           onTap: () => controller.speechToText.value.isNotListening ? controller.startListening(context) : controller.stopListening(),
           borderRadius: BorderRadius.circular(45),
           child: Container(
-            width: 60, height: 45,
-            padding: EdgeInsets.symmetric(), alignment: Alignment.center,
+            width: 45, height: 45, alignment: Alignment.center,
             decoration: BoxDecoration(color: Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
             child: (controller.speechToText.value.isNotListening)
-                ? Iconify(Fa6Solid.microphone_lines, size: 27, color: Colors.white,)
-                : SpinKitWave(color: Colors.white, size: 27, itemCount: 12, type: SpinKitWaveType.center,),
+                ? Iconify(Fa6Solid.microphone_lines, size: 24, color: Colors.white,)
+                : SpinKitWave(color: Colors.white, size: 24, itemCount: 12, type: SpinKitWaveType.center,),
           ),
         ))
     );

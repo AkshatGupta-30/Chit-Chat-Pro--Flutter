@@ -1,0 +1,23 @@
+import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconify_flutter/iconify.dart';
+
+class ImageButton extends StatelessWidget {
+  ImageButton({super.key});
+
+  final chatController = Get.find<ChatController>();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(45),
+      child: Container(
+        width: 45, height: 45, alignment: Alignment.center,
+        decoration: BoxDecoration(color: Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
+        child: Iconify(Bx.image_add, size: 24, color: Colors.white,)
+      ),
+    );
+  }
+}
