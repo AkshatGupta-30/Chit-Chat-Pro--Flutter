@@ -1,4 +1,5 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
+import 'package:chit_chat_pro/src/controllers/speech_to_text_controller.dart';
 import 'package:chit_chat_pro/src/pages/main_view.dart';
 import 'package:chit_chat_pro/src/pages/bottom_view.dart';
 import 'package:circular_countdown/circular_countdown.dart';
@@ -11,18 +12,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: ChatController(),
-      builder: (controller) {
-        return Scaffold(
-          appBar: _appBar(controller, context),
-          body: _body(controller),
-        );
-      }
+    Get.put(ChatController());
+    Get.put(SpeechToTextController());
+    return Scaffold(
+      appBar: _appBar(context),
+      body: _body(),
     );
   }
 
-  AppBar _appBar(ChatController controller, BuildContext context) {
+  AppBar _appBar(BuildContext context) {
+    final controller = Get.find<ChatController>();
     return AppBar(
       title: Text('Chit Chat Pro'),
       actions: [
@@ -37,9 +36,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Column _body(ChatController controller) {
-    return Column(
-      children: [Gap(12), PromptView(), Gap(2), BottomView(),],
-    );
+  Column _body() {
+    return Column(children: [Gap(12), PromptView(), Gap(2), BottomView()]);
   }
 }

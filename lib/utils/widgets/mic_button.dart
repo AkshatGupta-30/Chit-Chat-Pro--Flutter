@@ -8,23 +8,21 @@ import 'package:iconify_flutter/iconify.dart';
 class MicButton extends StatelessWidget {
   MicButton({super.key});
 
+  final controller = Get.find<SpeechToTextController>();
   final chatController = Get.find<ChatController>();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder(
-      init: SpeechToTextController(),
-      builder: (controller) => Obx(() => InkWell(
-          onTap: () => controller.speechToText.value.isNotListening ? controller.startListening(context) : controller.stopListening(),
-          borderRadius: BorderRadius.circular(45),
-          child: Container(
-            width: 45, height: 45, alignment: Alignment.center,
-            decoration: BoxDecoration(color: Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
-            child: (controller.speechToText.value.isNotListening)
-                ? Iconify(Fa6Solid.microphone_lines, size: 24, color: Colors.white,)
-                : SpinKitWave(color: Colors.white, size: 24, itemCount: 12, type: SpinKitWaveType.center,),
-          ),
-        ))
-    );
+    return Obx(() => InkWell(
+      onTap: () => controller.speechToText.value.isNotListening ? controller.startListening(context) : controller.stopListening(),
+      borderRadius: BorderRadius.circular(45),
+      child: Container(
+        width: 45, height: 45, alignment: Alignment.center,
+        decoration: BoxDecoration(color: Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
+        child: (controller.speechToText.value.isNotListening)
+            ? Iconify(Fa6Solid.microphone_lines, size: 24, color: Colors.white,)
+            : SpinKitWave(color: Colors.white, size: 24, itemCount: 12, type: SpinKitWaveType.center,),
+      ),
+    ));
   }
 }

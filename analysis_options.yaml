@@ -186,7 +186,7 @@ linter:
     # unnecessary_null_checks
     # unnecessary_null_in_if_null_operators
     # unnecessary_nullable_for_final_variable_declarations
-    # unnecessary_overrides
+    unnecessary_overrides: false
     # unnecessary_parenthesis
     # unnecessary_raw_strings
     # unnecessary_statements
