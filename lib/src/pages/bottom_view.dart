@@ -1,6 +1,7 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/utils/widgets/image_button.dart';
 import 'package:chit_chat_pro/utils/widgets/mic_button.dart';
+import 'package:chit_chat_pro/utils/widgets/prompt_field.dart';
 import 'package:chit_chat_pro/utils/widgets/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -19,16 +20,7 @@ class BottomView extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          TextField(
-            controller: controller.textController, focusNode: controller.focusNode,
-            textInputAction: TextInputAction.newline, keyboardType: TextInputType.multiline,
-            minLines: 1, maxLines: 6, style: Theme.of(context).primaryTextTheme.bodyLarge,
-            decoration: InputDecoration(
-              hintText: "Share your thoughts with us.",
-              suffixIcon: CloseButton(onPressed: () => controller.textController.clear(),)
-            ),
-            onTapOutside: (event) => controller.focusNode.unfocus(),
-          ),
+          PromptField(),
           Gap(10),
           Row(children: [SubmitButtton(), Gap(5), ImageButton(), Gap(5), MicButton()]),
           Gap(10),
