@@ -25,6 +25,7 @@ dependencies:
   http: ^1.2.1
   iconify_flutter: 
     path: packages/iconify_flutter_plus/
+  image_picker: ^1.0.7
   sliver_tools: ^0.2.12
   speech_to_text: ^6.6.0
   super_string: ^1.0.3
