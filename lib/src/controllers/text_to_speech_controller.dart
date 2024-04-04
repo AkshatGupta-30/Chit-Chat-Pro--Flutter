@@ -9,7 +9,7 @@ class TTSController extends GetxController {
   final int index;
   TTSController(this.index);
 
-  final chatController = Get.find<ChatController>();
+  final _chatController = Get.find<ChatController>();
   FlutterTts flutterTts = FlutterTts();
   String _text = '';
 
@@ -41,7 +41,7 @@ class TTSController extends GetxController {
     initTTS();
   }
 
-  void initDetail() => _text = chatController.contents[index].content;
+  void initDetail() => _text = _chatController.contents[index].content;
 
   Future<void> initTTS() async {
     _setAwaitOptions();
