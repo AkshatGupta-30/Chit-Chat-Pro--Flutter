@@ -70,27 +70,44 @@ class PromptSection extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        SizedBox(width: 30,), Gap(5),
+        Gap(30),
         Expanded(
-          child: Obx(() => (!controller.isReEdit.value)
-              ? SelectableText(
-                userPrompt.content,
-                style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15)
-              )
-              : TextField(
-                controller: controller.promtTextController, focusNode: controller.focusNode,
-                minLines: 1, maxLines: null, enabled: true,
-                cursorColor: Colors.grey.shade400,
-                style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
-                decoration: InputDecoration(
-                  constraints: BoxConstraints(minHeight: 10, minWidth: double.maxFinite),
-                  contentPadding: EdgeInsets.zero,
-                  border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400),),
-                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
-                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
+          child: Obx(() {
+            if(!controller.isReEdit.value) {
+              String prompt = userPrompt.content;
+              final List<String> parts = prompt.split(')!}!]');
+              if(parts.length != 1) parts.add(')!}!]');
+              return RichText(
+                text: TextSpan(
+                  style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+                  children: (parts.length == 1)
+                      ? [TextSpan(text: prompt, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15))]
+                      : [
+                        TextSpan(
+                          text: "@image ", style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
+                            fontSize: 15, color: Colors.blue
+                          )
+                        ),
+                        TextSpan(text: parts[1], style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15))
+                      ]
                 ),
-                onTapOutside: null,
-              )
+              );
+            }
+            return TextField(
+              controller: controller.promtTextController, focusNode: controller.focusNode,
+              minLines: 1, maxLines: null, enabled: true,
+              cursorColor: Colors.grey.shade400,
+              style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+              decoration: InputDecoration(
+                constraints: BoxConstraints(minHeight: 10, minWidth: double.maxFinite),
+                contentPadding: EdgeInsets.zero,
+                border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400),),
+                enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
+              ),
+              onTapOutside: null,
+            );
+          }
         )
         )
       ]

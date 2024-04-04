@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:chit_chat_pro/src/controllers/image_to_text_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
 import 'package:chit_chat_pro/src/model/request.dart';
 import 'package:chit_chat_pro/src/model/response.dart';
@@ -79,7 +80,13 @@ class ChatController extends GetxController {
   Future<void> submit({String? prompt}) async {
     startTimer();
     if(prompt == null) {
-      prompts.add(Message(role: 'user', content: textController.text));
+      final ittController = Get.find<ImageToTextController>();
+      String contentOfPrompt = textController.text;
+      if(ittController.imageFile.value.path.isNotEmpty) {
+        contentOfPrompt = '[!{!(${ittController.displayText.value})!}!] $contentOfPrompt';
+        ittController.removeImage();
+      }
+      prompts.add(Message(role: 'user', content: contentOfPrompt));
       textController.clear();
     } else {
       prompts.add(Message(role: 'user', content: prompt));
