@@ -22,7 +22,7 @@ class ImageView extends StatelessWidget {
           children: [
             _displayImage(), Gap(5), Iconify(Bx.bxs_right_arrow_alt, color: Colors.white), Gap(5),
             Expanded(child: _textFromImage(context)),
-            Gap(5), _edit()
+            Gap(5), _edit(context)
           ],
         ),
       );
@@ -83,7 +83,7 @@ class ImageView extends StatelessWidget {
         ),
       );
     }
-    String displayText = controller.scannedText.value;
+    String displayText = controller.displayText.value;
     if ((displayText.split('\n').length - 1) >= 2) {
       int index = displayText.indexOf('\n', displayText.indexOf('\n') + 1);
       displayText = '${displayText.substring(0, index)}....${displayText.substring(index)}';
@@ -94,7 +94,7 @@ class ImageView extends StatelessWidget {
     );
   }
 
-  _edit() {
+  _edit(BuildContext context) {
     if(controller.textScanning.value) {
       return Shimmer.fromColors(
         baseColor: Colors.grey.shade900, highlightColor: Colors.grey.shade700,
@@ -108,7 +108,7 @@ class ImageView extends StatelessWidget {
       );
     }
     return IconButton(
-      onPressed: () {},
+      onPressed: () => controller.showImageTextDialog(context),
       padding: EdgeInsets.zero,
       style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.deepPurple.shade900)),
       icon: Iconify(MaterialSymbols.edit_note_rounded, color: Colors.white,)

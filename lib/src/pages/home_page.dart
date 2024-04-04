@@ -19,6 +19,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: _appBar(context),
       body: _body(),
+      resizeToAvoidBottomInset: true,
     );
   }
 

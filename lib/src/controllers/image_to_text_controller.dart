@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chit_chat_pro/src/pages/image_text_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,10 @@ class ImageToTextController extends GetxController {
   final imageFile = File('').obs;
   final textScanning = false.obs;
   final scannedText = ''.obs;
+
+  final displayText = ''.obs;
+  final textController = TextEditingController();
+  final focusNode = FocusNode();
 
   void getImage(BuildContext context) {
     final theme = Theme.of(context);
@@ -73,7 +78,12 @@ class ImageToTextController extends GetxController {
     Navigator.pop(context);
   }
 
-  void removeImage() => imageFile.value = File('');
+  void removeImage() {
+    imageFile.value = File('');
+    scannedText.value = '';
+    textController.clear();
+    textScanning.value = false;
+  }
 
   void _getRecognizedText() async {
     textScanning.value = true;
@@ -87,6 +97,35 @@ class ImageToTextController extends GetxController {
         scannedText.value = '$scannedText${line.text}\n';
       }
     }
+    scannedText.value = scannedText.value.substring(0, scannedText.value.lastIndexOf('\n'));
+    displayText.value = scannedText.value;
+    textController.text = scannedText.value;
     textScanning.value = false;
+  }
+
+  showImageTextDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: ImageTextDialog()
+        )
+      ),
+      barrierDismissible: !focusNode.hasFocus
+    );
+  }
+
+  @override
+  void onClose() {
+    textController.dispose();
+    super.onClose();
+  }
+
+  void doneChangeText() => displayText.value = textController.text;
+
+  void resetText() {
+    textController.text = scannedText.value;
+    displayText.value = scannedText.value;
   }
 }
