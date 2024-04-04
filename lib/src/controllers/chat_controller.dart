@@ -97,7 +97,6 @@ class ChatController extends GetxController {
     contents.add(chatResponse.choices.first.message);
     isAnimated.add(false);
     finishReasons.add(chatResponse.choices.first.finishReason);
-    update();
   }
 
   void deletePromptContentSection(int index) {
