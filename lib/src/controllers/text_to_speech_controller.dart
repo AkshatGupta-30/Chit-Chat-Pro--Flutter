@@ -57,31 +57,26 @@ class TTSController extends GetxController {
     flutterTts.setStartHandler(() {
       isPlaying.value = true;
       canStopped.value = true;
-      update();
     });
 
     flutterTts.setPauseHandler(() {
       isPlaying.value = false;
       canStopped.value = true;
-      update();
     });
 
     flutterTts.setContinueHandler(() {
       isPlaying.value = true;
       canStopped.value = true;
-      update();
     });
 
     flutterTts.setCancelHandler(() {
       isPlaying.value = false;
       canStopped.value = false;
-      update();
     });
 
     flutterTts.setCompletionHandler(() {
       canStopped.value = false;
       isPlaying.value = false;
-      update();
     });
 
     flutterTts.setErrorHandler((msg) {
@@ -98,7 +93,6 @@ class TTSController extends GetxController {
   Future<void> changeRate(double newValue) async {
     rate.value = newValue;
     await flutterTts.setSpeechRate(newValue);
-    update();
   }
 
   Future<void> _configureTTS() async {

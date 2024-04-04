@@ -26,8 +26,8 @@ class PromptSection extends StatelessWidget {
     );
   }
 
-  Row _header(BuildContext context) {
-    return Row(
+  _header(BuildContext context) {
+    return Obx(() => Row(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -48,13 +48,12 @@ class PromptSection extends StatelessWidget {
         ),
         Gap(8),
         if(controller.chatController.contents.length-1 == index) ...[
-          Obx(() => (controller.chatController.isButtonEnabled.value)
+          (controller.chatController.isButtonEnabled.value)
               ? InkWell(
                 onTap: () => (controller.chatController.isButtonEnabled.value) ? controller.chatController.refreshChat() : null,
                 child: Iconify(Typcn.refresh_outline, color: Colors.grey, size: 27,)
               )
               : SpinKitRipple(color: Colors.grey, size: 27,),
-          ),
           Gap(8),
         ],
         InkWell(
@@ -63,7 +62,7 @@ class PromptSection extends StatelessWidget {
         ),
         Gap(8),
       ]
-    );
+    ));
   }
 
   Row _promptArea(Message userPrompt, BuildContext context) {

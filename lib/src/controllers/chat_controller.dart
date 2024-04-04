@@ -110,14 +110,12 @@ class ChatController extends GetxController {
     // * - Refresh chat and get new content at last index
     contents.removeLast();
     isAnimated.removeLast();
-    update();
 
     ChatRequest chatRequest = ChatRequest(messages: prompts, maxTokens: 500);
     ChatResponse chatResponse = await ChatCompletionApi.getChat(chatRequest);
     contents.add(chatResponse.choices.first.message);
     finishReasons.add(chatResponse.choices.first.finishReason);
     isAnimated.add(false);
-    update();
   }
 
   Future<void> copy(int index) async {
