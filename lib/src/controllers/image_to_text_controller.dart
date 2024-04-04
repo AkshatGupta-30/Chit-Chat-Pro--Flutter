@@ -1,17 +1,15 @@
 import 'dart:io';
 
-import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:iconify_flutter/iconify.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageToTextController extends GetxController {
   final ImagePicker picker = ImagePicker();
   final imageFile = File('').obs;
-  // ignore: unused_field
-  final _chatController = Get.find<ChatController>();
   final textScanning = false.obs;
   final scannedText = ''.obs;
 
@@ -63,7 +61,10 @@ class ImageToTextController extends GetxController {
   void _pickImage(BuildContext context, ImageSource source) async {
     try {
       final pickedImage = await picker.pickImage(source: source);
-      if(pickedImage != null) imageFile.value = File(pickedImage.path);
+      if(pickedImage != null) {
+        imageFile.value = File(pickedImage.path);
+        _getRecognizedText();
+      }
     } catch (e) {
       textScanning.value = false;
       imageFile.value = File('');
@@ -73,4 +74,19 @@ class ImageToTextController extends GetxController {
   }
 
   void removeImage() => imageFile.value = File('');
+
+  void _getRecognizedText() async {
+    textScanning.value = true;
+    final inputImage = InputImage.fromFilePath(imageFile.value.path);
+    final textDetector = GoogleMlKit.vision.textRecognizer();
+    RecognizedText recognizedText = await textDetector.processImage(inputImage);
+    await textDetector.close();
+    scannedText.value = '';
+    for(TextBlock block in recognizedText.blocks) {
+      for(TextLine line in block.lines) {
+        scannedText.value = '$scannedText${line.text}\n';
+      }
+    }
+    textScanning.value = false;
+  }
 }

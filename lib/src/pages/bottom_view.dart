@@ -1,5 +1,6 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/utils/widgets/image_button.dart';
+import 'package:chit_chat_pro/utils/widgets/image_view.dart';
 import 'package:chit_chat_pro/utils/widgets/mic_button.dart';
 import 'package:chit_chat_pro/utils/widgets/prompt_field.dart';
 import 'package:chit_chat_pro/utils/widgets/submit_button.dart';
@@ -19,14 +20,17 @@ class BottomView extends StatelessWidget {
       width: media.width,
       padding: EdgeInsets.all(10),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          PromptField(),
-          Gap(10),
+          ImageView(), PromptField(), Gap(10),
           Row(children: [SubmitButtton(), Gap(5), ImageButton(), Gap(5), MicButton()]),
           Gap(10),
-          Text(
-            "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",
-            style: Theme.of(context).primaryTextTheme.bodySmall,
+          Container(
+            width: double.maxFinite, alignment: Alignment.center,
+            child: Text(
+              "Chit Chat Pro, Enhanced with ChatGPT Brilliance.",
+              style: Theme.of(context).primaryTextTheme.bodySmall,
+            ),
           )
         ],
       ),

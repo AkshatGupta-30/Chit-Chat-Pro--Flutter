@@ -22,10 +22,12 @@ dependencies:
   flutter_tts: ^4.0.1
   gap: ^3.0.1
   get: ^4.6.6
+  google_ml_kit: ^0.16.3
   http: ^1.2.1
   iconify_flutter: 
     path: packages/iconify_flutter_plus/
   image_picker: ^1.0.7
+  shimmer: ^3.0.0
   sliver_tools: ^0.2.12
   speech_to_text: ^6.6.0
   super_string: ^1.0.3
