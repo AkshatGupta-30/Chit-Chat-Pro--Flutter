@@ -23,7 +23,7 @@ class ImageTextDialog extends StatelessWidget {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [_image(), Gap(20), _textField(theme), Gap(10), _bottomButtons(theme)],
+                children: [_image(context), Gap(20), _textField(theme), Gap(10), _bottomButtons(theme)],
               ),
             )
           ],
@@ -32,7 +32,7 @@ class ImageTextDialog extends StatelessWidget {
     );
   }
 
-  _image() {
+  _image(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: 50, maxWidth: 125,
@@ -44,7 +44,7 @@ class ImageTextDialog extends StatelessWidget {
           Positioned(
             top: 5, right: 5,
             child: InkWell(
-              onTap: () {},
+              onTap: () => controller.crop(context),
               child: CircleAvatar(
                 radius: 15, backgroundColor: Colors.black54,
                 child: Iconify(MaterialSymbols.open_in_new, size: 15, color: Colors.white)

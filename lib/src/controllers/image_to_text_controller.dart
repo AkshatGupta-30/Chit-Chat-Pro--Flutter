@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:iconify_flutter/iconify.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageToTextController extends GetxController {
@@ -116,16 +117,39 @@ class ImageToTextController extends GetxController {
     );
   }
 
-  @override
-  void onClose() {
-    textController.dispose();
-    super.onClose();
-  }
-
   void doneChangeText() => displayText.value = textController.text;
 
   void resetText() {
     textController.text = scannedText.value;
     displayText.value = scannedText.value;
+  }
+
+  Future<void> crop(BuildContext context) async {
+    Navigator.pop(context);
+    File? croppedFile = await ImageCropper().cropImage(
+      sourcePath: imageFile.value.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      androidUiSettings: AndroidUiSettings(
+        toolbarTitle: 'Edit Image', toolbarColor: Colors.teal.shade700, toolbarWidgetColor: Colors.white,
+        initAspectRatio: CropAspectRatioPreset.original, lockAspectRatio: false,
+        cropGridColor: Colors.grey, cropFrameColor: Colors.grey, cropFrameStrokeWidth: 5
+      ),
+    );
+    if(croppedFile != null) {
+      imageFile.value = croppedFile;
+      _getRecognizedText();
+    }
+  }
+
+  @override
+  void onClose() {
+    textController.dispose();
+    super.onClose();
   }
 }

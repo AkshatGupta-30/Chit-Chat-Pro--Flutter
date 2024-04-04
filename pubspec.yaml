@@ -26,6 +26,7 @@ dependencies:
   http: ^1.2.1
   iconify_flutter: 
     path: packages/iconify_flutter_plus/
+  image_cropper: ^1.5.1
   image_picker: ^1.0.7
   shimmer: ^3.0.0
   sliver_tools: ^0.2.12
