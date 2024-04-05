@@ -50,4 +50,9 @@ class PCController extends GetxController {
     chatController.contents.removeAt(index+1);
     _promptText.value = promtTextController.text;
   }
+
+  void cancel() {
+    isReEdit.value = false;
+    promtTextController.text = chatController.prompts[index].content;
+  }
 }

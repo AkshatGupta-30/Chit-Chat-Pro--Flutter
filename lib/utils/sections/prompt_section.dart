@@ -17,7 +17,7 @@ class PromptSection extends StatelessWidget {
     Message userPrompt = controller.chatController.prompts[index];
     return Column(
       children: [
-        _header(context),
+        _header(context, userPrompt),
         Gap(5),
         _promptArea(userPrompt, context),
         Gap(10),
@@ -26,7 +26,7 @@ class PromptSection extends StatelessWidget {
     );
   }
 
-  _header(BuildContext context) {
+  _header(BuildContext context, Message prompt) {
     return Obx(() => Row(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,13 +34,14 @@ class PromptSection extends StatelessWidget {
         FluentUiEmojiIcon(fl: Fluents.flBoy, w: 20, h: 20,), Gap(10),
         Text('You', style: Theme.of(context).primaryTextTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w800, fontSize: 22)),
         Spacer(),
-        Obx(() => (controller.isReEdit.value)
-            ? SizedBox()
-            : InkWell(
-              onTap: controller.editTapped,
-              child: Iconify(Bx.rename, color: Colors.grey,),
-            )
-        ),
+        if(prompt.image == null)
+          Obx(() => (controller.isReEdit.value)
+              ? SizedBox()
+              : InkWell(
+                onTap: controller.editTapped,
+                child: Iconify(Bx.rename, color: Colors.grey,),
+              )
+          ),
         Gap(8),
         InkWell(
           onTap: () => controller.chatController.copy(index),
@@ -103,7 +104,7 @@ class PromptSection extends StatelessWidget {
                 enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
                 focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
               ),
-              onTapOutside: null,
+              onTapOutside: (_) => controller.focusNode.unfocus(),
             );
           }
         )
@@ -131,7 +132,7 @@ class PromptSection extends StatelessWidget {
             ),
             Gap(15),
             InkWell(
-              onTap: controller.editTapped,
+              onTap: controller.cancel,
               borderRadius: BorderRadius.circular(12),
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8), alignment: Alignment.center,

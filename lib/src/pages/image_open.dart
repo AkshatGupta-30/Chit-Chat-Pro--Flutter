@@ -13,8 +13,7 @@ class ImageOpen extends StatelessWidget {
       body: SizedBox(
         width: double.maxFinite, height: double.maxFinite,
         child: InteractiveViewer(
-          minScale: 1,
-          maxScale: 3,
+          minScale: 1, maxScale: 3,
           child: Image.file(image, fit: BoxFit.contain)
         ),
       ),

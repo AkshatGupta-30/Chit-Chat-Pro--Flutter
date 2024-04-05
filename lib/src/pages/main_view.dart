@@ -62,6 +62,6 @@ class PromptView extends StatelessWidget {
           ),
         );
       },
-          ));
+    ));
   }
 }
