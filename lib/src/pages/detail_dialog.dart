@@ -1,6 +1,7 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/src/controllers/text_to_speech_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
+import 'package:chit_chat_pro/src/pages/image_open.dart';
 import 'package:fluentui_emoji_icon/fluentui_emoji_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -77,30 +78,21 @@ class DetailDialog extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RichText(
-            maxLines: 5, overflow: TextOverflow.ellipsis,
-            text: TextSpan(
-              style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
-              children: (parts.length == 1)
-                  ? [
-                    TextSpan(
-                      text: prompt,
-                      style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15)
-                    )
-                  ]
-                  : [
-                    TextSpan(
-                      text: "@image ", style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
-                        fontSize: 15, color: Colors.blue
-                      ),
-                    ),
-                    TextSpan(
-                      text: parts[1],
-                      style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15)
-                    )
-                  ]
+          if (parts.length == 1) ...[
+            Text(prompt, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15))
+          ] else ...[
+            InkWell(
+              onTap: () => Get.to(() => ImageOpen(chatController.prompts[index].image!)),
+              child: Text(
+                "@image ",
+                style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
+                  fontSize: 15, color: Colors.blue,
+                  decoration: TextDecoration.underline, decorationColor: Colors.blue
+                )
+              )
             ),
-          ),
+            Text(parts[1], style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15))
+          ],
           Divider(color: Colors.white54,),
         ],
       ),

@@ -35,8 +35,8 @@ class ImageTextDialog extends StatelessWidget {
   _image(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minWidth: 50, maxWidth: 125,
-        minHeight: 100, maxHeight: 300
+        minWidth: 0, maxWidth: 125,
+        minHeight: 0, maxHeight: 300
       ),
       child: Stack(
         children: [

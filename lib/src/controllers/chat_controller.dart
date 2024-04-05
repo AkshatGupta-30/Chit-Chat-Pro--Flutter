@@ -84,9 +84,9 @@ class ChatController extends GetxController {
       String contentOfPrompt = textController.text;
       if(ittController.imageFile.value.path.isNotEmpty) {
         contentOfPrompt = '${ittController.displayText.value}!!!!**!!!! $contentOfPrompt';
-        ittController.removeImage();
       }
-      prompts.add(Message(role: 'user', content: contentOfPrompt));
+      prompts.add(Message(role: 'user', content: contentOfPrompt, image: ittController.imageFile.value));
+      ittController.removeImage();
       textController.clear();
     } else {
       prompts.add(Message(role: 'user', content: prompt));

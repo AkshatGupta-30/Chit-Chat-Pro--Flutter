@@ -1,7 +1,10 @@
+import 'dart:io';
+
 class Message {
   String role;
   String content;
-  Message({required this.role, required this.content});
+  File? image;
+  Message({required this.role, required this.content, this.image});
 
   factory Message.fromJson(Map<String, dynamic> json) {
     return Message(role: json['role'], content: json['content']);
@@ -13,4 +16,6 @@ class Message {
       'content': content,
     };
   }
+
+  void addImage(File img) => image = img;
 }
