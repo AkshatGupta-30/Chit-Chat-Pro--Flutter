@@ -1,7 +1,6 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
 import 'package:chit_chat_pro/src/controllers/text_to_speech_controller.dart';
 import 'package:chit_chat_pro/src/model/message.dart';
-import 'package:expandable_text/expandable_text.dart';
 import 'package:fluentui_emoji_icon/fluentui_emoji_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -64,16 +63,43 @@ class DetailDialog extends StatelessWidget {
   }
 
   Container _promptText(BuildContext context, Message userPrompt) {
+    String prompt = userPrompt.content;
+    List<String> lines = prompt.split('\n');
+    int newlineCount = lines.length - 1;
+    if (newlineCount >= 4) {
+      lines[4] += '....';
+      prompt = lines.join('\n');
+    }
+
+    final List<String> parts = prompt.split('!!!!**!!!!');
     return Container(
       color: Color(0xFF1A1A1A),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ExpandableText(
-            userPrompt.content, expandText: 'Show more..', collapseText: 'Show Less...',
-            animation: true, maxLines: 5,
-            style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
-            linkColor: Colors.blue, linkEllipsis: true,
+          RichText(
+            maxLines: 5, overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+              children: (parts.length == 1)
+                  ? [
+                    TextSpan(
+                      text: prompt,
+                      style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15)
+                    )
+                  ]
+                  : [
+                    TextSpan(
+                      text: "@image ", style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
+                        fontSize: 15, color: Colors.blue
+                      ),
+                    ),
+                    TextSpan(
+                      text: parts[1],
+                      style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15)
+                    )
+                  ]
+            ),
           ),
           Divider(color: Colors.white54,),
         ],
@@ -104,15 +130,14 @@ class DetailDialog extends StatelessWidget {
     );
   }
 
-  Expanded _gptText(BuildContext context, Message gptMessage) {
+  _gptText(BuildContext context, Message gptMessage) {
     return Expanded(
       child: SingleChildScrollView(
+        padding: EdgeInsets.zero,
         scrollDirection: Axis.vertical,
-        child: SizedBox(
-          child: Text(
-            gptMessage.content, overflow: TextOverflow.visible,
-            style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
-          ),
+        child: Text(
+          gptMessage.content, overflow: TextOverflow.visible,
+          style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
         ),
       ),
     );

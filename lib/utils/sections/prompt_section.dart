@@ -74,8 +74,7 @@ class PromptSection extends StatelessWidget {
           child: Obx(() {
             if(!controller.isReEdit.value) {
               String prompt = userPrompt.content;
-              final List<String> parts = prompt.split(')!}!]');
-              if(parts.length != 1) parts.add(')!}!]');
+              final List<String> parts = prompt.split('!!!!**!!!!');
               return RichText(
                 text: TextSpan(
                   style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
