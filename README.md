@@ -47,3 +47,97 @@ details>
 | [animated_text_kit](https://pub.dev/packages/animated_text_kit) | [circular_countdown](https://pub.dev/packages/circular_countdown) | [clipboard](https://pub.dev/packages/clipboard) | [fluentui_emoji_icon](https://pub.dev/packages/fluentui_emoji_icon)  | [flutter_tts](https://pub.dev/packages/flutter_tts)  | [get](https://pub.dev/packages/get) |
 | --- | --- | --- | --- | --- | --- |
 | [**google_ml_kit**](https://pub.dev/packages/google_ml_kit) | [**http**](https://pub.dev/packages/http) | [**image_cropper**](https://pub.dev/packages/image_cropper) | [**image_picker**](https://pub.dev/packages/image_picker) | [**speech_to_text**](https://pub.dev/packages/speech_to_text) | [**text_to_speech**](https://pub.dev/packages/text_to_speech) |
+
+----
+
+## Installation
+Follow these steps to install and run Sonicity on your system.
+
+### Prerequisites
+Before you begin, ensure you have the following dependencies and tools installed:
+- Flutter SDK: [Installation Guide](https://flutter.dev/docs/get-started/install)
+- Dart SDK
+- [Dependencies](#dependencies-used)
+
+### Clone the Repository
+1. Open your terminal or command prompt.
+2. Use the following command to clone the ProjectName repository:
+```git clone https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter.git```
+
+### Install Dependencies
+- Run the following command to install the required dependencies:
+~~~bash
+flutter pub get
+~~~
+
+### Build and Run
+1. Connect your device or start an emulator.
+2. To build and run the project, use the following command:
+~~~bash
+flutter run
+~~~
+
+This will build the project and install it on your connected device or emulator.
+
+----
+
+## Folder Structure
+#### Here is the core folder structure which flutter provides.
+```
+sonicity/
+|- android
+|- assets
+|- ios
+|- lib
+|- linux
+|- macos
+|- web
+|- windows
+```
+
+#### Now, lets dive into the lib folder which has the main code for the application.
+```
+lib/
+|- src/
+|- utils/
+|- main.dart
+```
+
+#### Src
+This directory contains all the application level constants. The folder structure is as follows: 
+```
+src/
+|- controllers/
+|- models/
+|- pages/
+|- services/
+```
+- **controllers** - This folder containes Getx Controllers for different views.
+- **models** - Contains all the models of the applications. For example, Song, Album, Artist, Playlist etc.
+- **pages** - This folder is the main folder that contains the ui for the pages.
+- **services** - Contains all the files for api calls.
+
+#### Utils
+This directory contains the common file(s) and utilities used in a project. The folder structure is as follows: 
+```
+utils/
+|- constants/
+|- sections/
+|- widgets/
+```
+- **constants** - This directory contains all the application level constants.
+- **enums** - This directory contains all the enums required in application.
+- **sections** - Contains sections that are shared in one screen to make code compact.
+- **widgets** - Contains the common widgets that are shared across multiple screens. For example, ListTile, Pop Up Buttons, Shimmers, etc.
+
+----
+
+## Contributing
+We welcome contributions to ProjectName. If you would like to contribute to the development or report issues, please follow these guidelines:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive messages.
+4. Push your changes to your fork.
+5. Submit a pull request to the main repository.
+
+----
