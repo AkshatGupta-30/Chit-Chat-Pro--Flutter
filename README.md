@@ -12,7 +12,13 @@ Chit Chat Pro is a cutting-edge application designed to emulate the functionalit
 
 ----
 
-details>
+# Gif
+| <img src="https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter/blob/main/assets/gifs/working.gif" height="600"> |
+| --- |
+
+----
+
+<details>
 <summary>Table of content</summary>
 
 # Table of contents  
