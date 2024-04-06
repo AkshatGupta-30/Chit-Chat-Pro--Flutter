@@ -4,7 +4,7 @@ import 'package:chit_chat_pro/src/pages/image_text_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:iconify_flutter/iconify.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -89,9 +89,9 @@ class ImageToTextController extends GetxController {
   void _getRecognizedText() async {
     textScanning.value = true;
     final inputImage = InputImage.fromFilePath(imageFile.value.path);
-    final textDetector = GoogleMlKit.vision.textRecognizer();
-    RecognizedText recognizedText = await textDetector.processImage(inputImage);
-    await textDetector.close();
+    final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
+    RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
+    await textRecognizer.close();
     scannedText.value = '';
     for(TextBlock block in recognizedText.blocks) {
       for(TextLine line in block.lines) {

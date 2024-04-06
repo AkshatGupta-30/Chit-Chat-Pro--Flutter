@@ -59,7 +59,7 @@ Chit Chat Pro is a cutting-edge application designed to emulate the functionalit
 ## Dependencies Used
 | [animated_text_kit](https://pub.dev/packages/animated_text_kit) | [circular_countdown](https://pub.dev/packages/circular_countdown) | [clipboard](https://pub.dev/packages/clipboard) | [fluentui_emoji_icon](https://pub.dev/packages/fluentui_emoji_icon)  | [flutter_tts](https://pub.dev/packages/flutter_tts)  | [get](https://pub.dev/packages/get) |
 | --- | --- | --- | --- | --- | --- |
-| [**google_ml_kit**](https://pub.dev/packages/google_ml_kit) | [**http**](https://pub.dev/packages/http) | [**image_cropper**](https://pub.dev/packages/image_cropper) | [**image_picker**](https://pub.dev/packages/image_picker) | [**speech_to_text**](https://pub.dev/packages/speech_to_text) | [**text_to_speech**](https://pub.dev/packages/text_to_speech) |
+| [**google_mlkit_text_recognition**](https://pub.dev/packages/google_mlkit_text_recognition) | [**http**](https://pub.dev/packages/http) | [**image_cropper**](https://pub.dev/packages/image_cropper) | [**image_picker**](https://pub.dev/packages/image_picker) | [**speech_to_text**](https://pub.dev/packages/speech_to_text) | [**text_to_speech**](https://pub.dev/packages/text_to_speech) |
 
 ----
 
