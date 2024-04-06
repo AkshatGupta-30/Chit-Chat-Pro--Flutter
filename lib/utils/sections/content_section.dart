@@ -51,7 +51,10 @@ class ContentSection extends StatelessWidget {
                   const Gap(10),
                   Expanded(
                     child: (controller.isAnimated[index])
-                        ? SelectableText(gptContent.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),)
+                        ? SelectableText.rich(
+                          style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+                          TextSpan(children: controller.highlightCode(gptContent.content)),
+                        )
                         : AnimatedTextKit(
                           animatedTexts: [
                             TypewriterAnimatedText(

@@ -148,6 +148,62 @@ class ChatController extends GetxController {
     return true;
   }
 
+  List<InlineSpan> highlightCode(String text) {
+    List<InlineSpan> spans = [];
+
+    RegExp regExp = RegExp(r'```([^`]*)```');
+    Iterable<RegExpMatch> matches = regExp.allMatches(text);
+
+    int lastIndex = 0;
+    for (RegExpMatch match in matches) {
+      // * : Text other that code
+      spans.add(TextSpan(text: text.substring(lastIndex, match.start)));
+
+      String codeBlock = match.group(0)!;
+      int firstNewlineIndex = codeBlock.indexOf('\n') + 1;
+      spans.addAll([
+        WidgetSpan(// * : Code Language
+          child: Container(
+            width: double.maxFinite, height: 40,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade800,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(20))
+            ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Text(
+                codeBlock.substring(0, firstNewlineIndex).replaceAll('```', '').title(),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+          )
+        ),
+        WidgetSpan(// * : Actual Code
+          child: Container(
+            width: double.maxFinite, padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            margin: EdgeInsets.only(bottom: 10),
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
+            ),
+            child: Text(
+              codeBlock.substring(firstNewlineIndex).replaceAll('\n```', ''),
+              style: const TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          )
+        )
+      ]);
+
+      lastIndex = match.end;
+    }
+
+    if (lastIndex < text.length) {
+      spans.add(TextSpan(text: text.substring(lastIndex)));
+    }
+
+    return spans;
+  }
+
   @override
   void onClose() {
     textController.dispose();

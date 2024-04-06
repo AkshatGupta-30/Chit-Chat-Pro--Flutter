@@ -127,9 +127,9 @@ class DetailDialog extends StatelessWidget {
       child: SingleChildScrollView(
         padding: EdgeInsets.zero,
         scrollDirection: Axis.vertical,
-        child: Text(
-          gptMessage.content, overflow: TextOverflow.visible,
+        child: SelectableText.rich(
           style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
+          TextSpan(children: chatController.highlightCode(gptMessage.content)),
         ),
       ),
     );
