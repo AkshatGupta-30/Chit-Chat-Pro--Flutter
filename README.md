@@ -141,3 +141,16 @@ We welcome contributions to ProjectName. If you would like to contribute to the 
 5. Submit a pull request to the main repository.
 
 ----
+
+## Special Thanks
+We extend our heartfelt gratitude to OpenAI for their exceptional APIs, which have been instrumental in empowering Chit Chat Pro with advanced conversational AI capabilities.
+
+----
+
+## License
+Sonicity is licensed under the [**MIT License**](https://github.com/AkshatGupta-30/Sonicity--Flutter/blob/main/LICENSE)
+
+----
+
+## Conclusion
+Chit Chat Pro leverages the power of OpenAI's APIs within a robust technical framework comprising Flutter, MVVM architecture, and GetX state management, to offer a superior AI-driven communication experience. Features like conversational AI, text-to-speech, and real-time translation are just the tip of the iceberg. We extend our deepest gratitude to OpenAI for their pivotal role in enabling these capabilities. As we look forward, Chit Chat Pro remains committed to innovation, aiming to continuously enhance user experience by harnessing the latest advancements in AI technology.
