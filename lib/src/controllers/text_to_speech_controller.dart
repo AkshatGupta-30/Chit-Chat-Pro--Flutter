@@ -22,14 +22,14 @@ class TTSController extends GetxController {
 
   List<DropdownMenuItem<double>> get dropdownItems{
     List<DropdownMenuItem<double>> menuItems = [
-      DropdownMenuItem(value: 0.25, child: Text('0.25x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 0.5, child: Text('0.5x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 0.75, child: Text('0.75x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 1, child: Text('1x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 1.25, child: Text('1.25x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 1.5, child: Text('1.5x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 1.75, child: Text('1.75x', style: TextStyle(color: Colors.white),)),
-      DropdownMenuItem(value: 2, child: Text('2x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 0.25, child: Text('0.25x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 0.5, child: Text('0.5x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 0.75, child: Text('0.75x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 1, child: Text('1x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 1.25, child: Text('1.25x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 1.5, child: Text('1.5x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 1.75, child: Text('1.75x', style: TextStyle(color: Colors.white),)),
+      const DropdownMenuItem(value: 2, child: Text('2x', style: TextStyle(color: Colors.white),)),
     ];
     return menuItems;
   }

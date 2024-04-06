@@ -22,9 +22,9 @@ class SubmitButtton extends StatelessWidget {
             : null,
         borderRadius: BorderRadius.circular(45),
         child: Container(
-          height: 45, padding: EdgeInsets.symmetric(), alignment: Alignment.center,
+          height: 45, padding: const EdgeInsets.symmetric(), alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: (controller.isButtonEnabled.value) ? Color(0xFF2d6a4f) : Colors.grey.shade900,
+            color: (controller.isButtonEnabled.value) ? const Color(0xFF2d6a4f) : Colors.grey.shade900,
             borderRadius: BorderRadius.circular(45)
           ),
           child: (controller.isButtonEnabled.value)
@@ -32,11 +32,11 @@ class SubmitButtton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Submit', style: Theme.of(context).primaryTextTheme.headlineSmall!),
-                  Gap(2),
-                  Iconify(MaterialSymbols.send_rounded, size: 32, color: Colors.white,)
+                  const Gap(2),
+                  const Iconify(MaterialSymbols.send_rounded, size: 32, color: Colors.white,)
                 ],
               )
-              : SpinKitDancingSquare(color: Colors.white, size: 40,),
+              : const SpinKitDancingSquare(color: Colors.white, size: 40,),
         ),
       )),
     );

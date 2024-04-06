@@ -18,13 +18,13 @@ class BottomView extends StatelessWidget {
     final media = MediaQuery.sizeOf(context);
     return Container(
       width: media.width,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ImageView(), PromptField(), Gap(10),
-          Row(children: [SubmitButtton(), Gap(5), ImageButton(), Gap(5), MicButton()]),
-          Gap(10),
+          ImageView(), PromptField(), const Gap(10),
+          Row(children: [SubmitButtton(), const Gap(5), ImageButton(), const Gap(5), MicButton()]),
+          const Gap(10),
           Container(
             width: double.maxFinite, alignment: Alignment.center,
             child: Text(

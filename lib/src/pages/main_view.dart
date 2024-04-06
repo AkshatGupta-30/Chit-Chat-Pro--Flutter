@@ -24,7 +24,7 @@ class PromptView extends StatelessWidget {
               return GestureDetector(
                 onTap: () => (controller.isButtonEnabled.value) ? controller.submit(prompt: '$title\n$subtitle') : null,
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
                     color: Colors.grey.shade900,
                     border: Border.all(color: Colors.grey.shade600),
@@ -48,14 +48,14 @@ class PromptView extends StatelessWidget {
             },
           ),
           floatingActionButton: AnimatedSlide(
-            offset: (controller.fabVisible.value) ? Offset.zero : Offset(2,0),
-            duration: Duration(milliseconds: 300),
+            offset: (controller.fabVisible.value) ? Offset.zero : const Offset(2,0),
+            duration: const Duration(milliseconds: 300),
             child: AnimatedOpacity(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               opacity: (controller.fabVisible.value) ? 1 : 0,
               child: FloatingActionButton(
                 onPressed: (controller.isScrollAbove.value) ? controller.scrollUp : controller.scrollDown,
-                backgroundColor: Colors.cyanAccent, shape: CircleBorder(),
+                backgroundColor: Colors.cyanAccent, shape: const CircleBorder(),
                 child: Iconify((controller.isScrollAbove.value) ? HeroiconsSolid.chevron_up : HeroiconsSolid.chevron_down, size: 40)
               ),
             ),

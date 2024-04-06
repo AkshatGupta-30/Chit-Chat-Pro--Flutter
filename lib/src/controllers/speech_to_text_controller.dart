@@ -20,8 +20,11 @@ class SpeechToTextController extends GetxController {
 
   Future<void> _initSpeech() async {
     speechEnabled.value = await speechToText.initialize(onStatus: (status) {
-      if(status == 'listening') listening.value = true;
-      else listening.value = false;
+      if(status == 'listening') {
+        listening.value = true;
+      } else {
+        listening.value = false;
+      }
     });
   }
 
@@ -29,7 +32,7 @@ class SpeechToTextController extends GetxController {
     _previousText.value = _chatController.textController.text;
     if(!speechEnabled.value) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('You need to enable Micophone and Nearby Device permisiion to enable Speech to text feature'))
+        const SnackBar(content: Text('You need to enable Micophone and Nearby Device permisiion to enable Speech to text feature'))
       );
     } else {
       await speechToText.listen(onResult: _onSpeechResult);

@@ -27,7 +27,7 @@ linter:
     # avoid_multiple_declarations_per_line
     # avoid_null_checks_in_equality_operators
     # avoid_positional_boolean_parameters
-    avoid_print: false
+    # avoid_print: false
     # avoid_private_typedef_functions
     # avoid_redundant_argument_values
     # avoid_relative_lib_imports
@@ -59,7 +59,7 @@ linter:
     # conditional_uri_does_not_exist
     # constant_identifier_names
     # control_flow_in_finally
-    curly_braces_in_flow_control_structures: false
+    # curly_braces_in_flow_control_structures: false
     # dangling_library_doc_comments
     # depend_on_referenced_packages
     # deprecated_consistency
@@ -117,10 +117,10 @@ linter:
     # prefer_asserts_with_message
     # prefer_collection_literals
     # prefer_conditional_assignment
-    prefer_const_constructors: false
-    prefer_const_constructors_in_immutables: false
+    # prefer_const_constructors: false
+    # prefer_const_constructors_in_immutables: false
     # prefer_const_declarations
-    prefer_const_literals_to_create_immutables: false
+    # prefer_const_literals_to_create_immutables: false
     # prefer_constructors_over_static_methods
     # prefer_contains
     # prefer_double_quotes
@@ -186,7 +186,7 @@ linter:
     # unnecessary_null_checks
     # unnecessary_null_in_if_null_operators
     # unnecessary_nullable_for_final_variable_declarations
-    unnecessary_overrides: false
+    # unnecessary_overrides: false
     # unnecessary_parenthesis
     # unnecessary_raw_strings
     # unnecessary_statements

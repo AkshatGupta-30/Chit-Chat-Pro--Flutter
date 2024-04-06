@@ -22,17 +22,17 @@ class PromptContentSection extends StatelessWidget {
         return GestureDetector(
           onDoubleTap: () => (index < chatController.contents.length) ? chatController.showDetailDialog(context, index) : null,
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Color(0xFF212529),
+              color: const Color(0xFF212529),
               border: Border.all(color: Colors.white24),
               borderRadius: BorderRadius.circular(20)
             ),
             child: Column(
               children: [
                 PromptSection(index, controller),
-                Gap(7), Divider(color: Colors.white54,), Gap(7),
+                const Gap(7), const Divider(color: Colors.white54,), const Gap(7),
                 ContentSection(index),
                 FinishReasonSection(index),
               ],
@@ -53,12 +53,12 @@ class FinishReasonSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if(chatController.contents.length == index) return SizedBox();
+      if(chatController.contents.length == index) return const SizedBox();
       return Container(
         height: 20, alignment: Alignment.centerRight,
         child: Text(
           'Finish Reason: ${chatController.finishReasons[index].toStr.title()}',
-          style: TextStyle(color: Colors.grey, fontSize: 12),
+          style: const TextStyle(color: Colors.grey, fontSize: 12),
         ),
       );
     });

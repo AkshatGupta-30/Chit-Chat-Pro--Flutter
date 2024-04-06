@@ -7,11 +7,11 @@ import 'package:get/get.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({super.key});
+  const MainApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
       title: 'Chit Chat Pro',
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      home: HomePage()
+      home: const HomePage()
     );
   }
 }

@@ -9,7 +9,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
   AppBar _appBar(BuildContext context) {
     final controller = Get.find<ChatController>();
     return AppBar(
-      title: Text('Chit Chat Pro'),
+      title: const Text('Chit Chat Pro'),
       actions: [
         Obx(() => CircularCountdown(
           diameter: 30, gapFactor: 3,
@@ -34,12 +34,12 @@ class HomePage extends StatelessWidget {
           countdownTotalColor: Colors.grey, countdownCurrentColor: Colors.orangeAccent,
           countdownRemainingColor: Colors.red, textStyle: Theme.of(context).primaryTextTheme.bodySmall,
         )),
-        Gap(10)
+        const Gap(10)
       ],
     );
   }
 
   Column _body() {
-    return Column(children: [Gap(12), PromptView(), Gap(2), BottomView()]);
+    return Column(children: [const Gap(12), PromptView(), const Gap(2), BottomView()]);
   }
 }

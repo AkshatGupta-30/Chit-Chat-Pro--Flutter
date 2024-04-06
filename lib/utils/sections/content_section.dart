@@ -24,10 +24,10 @@ class ContentSection extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FluentUiEmojiIcon(fl: Fluents.flRobot, w: 30, h: 30,),
-              Gap(5),
+              const FluentUiEmojiIcon(fl: Fluents.flRobot, w: 30, h: 30,),
+              const Gap(5),
               Container(
-                height: 30, padding: EdgeInsets.symmetric(horizontal: 5), alignment: Alignment.center,
+                height: 30, padding: const EdgeInsets.symmetric(horizontal: 5), alignment: Alignment.center,
                 child: Text(
                   'Chit Chat Pro',
                   style: Theme.of(context).primaryTextTheme.headlineSmall!.copyWith(
@@ -35,11 +35,11 @@ class ContentSection extends StatelessWidget {
                   )
                 )
               ),
-              Spacer(),
+              const Spacer(),
               if(gptContent != null)
                 InkResponse(
                   onTap: () => controller.showDetailDialog(context, index),
-                  child: Iconify(RadixIcons.open_in_new_window, color: Colors.grey,)
+                  child: const Iconify(RadixIcons.open_in_new_window, color: Colors.grey,)
                 ),
             ]
           ),
@@ -47,15 +47,15 @@ class ContentSection extends StatelessWidget {
               ?  Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  SizedBox(width: 30,),
-                  Gap(10),
+                  const SizedBox(width: 30,),
+                  const Gap(10),
                   Expanded(
                     child: (controller.isAnimated[index])
                         ? SelectableText(gptContent.content, style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),)
                         : AnimatedTextKit(
                           animatedTexts: [
                             TypewriterAnimatedText(
-                              gptContent.content, speed: Duration(milliseconds: 20),
+                              gptContent.content, speed: const Duration(milliseconds: 20),
                               textStyle: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
                             ),
                           ],
@@ -67,7 +67,7 @@ class ContentSection extends StatelessWidget {
                 ]
               )
               : Padding(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: SpinKitThreeBounce(color: Theme.of(context).primaryTextTheme.bodyLarge!.color, size: 25,),
               )
         ],

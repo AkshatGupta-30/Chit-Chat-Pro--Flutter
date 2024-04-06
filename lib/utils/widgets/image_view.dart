@@ -15,14 +15,14 @@ class ImageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      if(controller.imageFile.value.path.isEmpty) return SizedBox();
+      if(controller.imageFile.value.path.isEmpty) return const SizedBox();
       return Container(
-        padding: EdgeInsets.only(left: 2, top: 2, right: 2, bottom: 10),
+        padding: const EdgeInsets.only(left: 2, top: 2, right: 2, bottom: 10),
         child: Row(
           children: [
-            _displayImage(), Gap(5), Iconify(Bx.bxs_right_arrow_alt, color: Colors.white), Gap(5),
+            _displayImage(), const Gap(5), const Iconify(Bx.bxs_right_arrow_alt, color: Colors.white), const Gap(5),
             Expanded(child: _textFromImage(context)),
-            Gap(5), _edit(context)
+            const Gap(5), _edit(context)
           ],
         ),
       );
@@ -46,7 +46,7 @@ class ImageView extends StatelessWidget {
               onTap: () => controller.removeImage(),
               child: CircleAvatar(
                 radius: 10, backgroundColor: Colors.grey.shade900,
-                child: Iconify(Ic.baseline_close, size: 15, color: Colors.white),
+                child: const Iconify(Ic.baseline_close, size: 15, color: Colors.white),
               ),
             ),
           ),
@@ -70,7 +70,7 @@ class ImageView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20)
               )
             ),
-            Gap(2),
+            const Gap(2),
             Container(
               width: double.maxFinite, height: 15,
               margin: EdgeInsets.only(right: media.width / 10),
@@ -100,7 +100,7 @@ class ImageView extends StatelessWidget {
         baseColor: Colors.grey.shade900, highlightColor: Colors.grey.shade700,
         child: Container(
           width: 35, height: 35,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.black,
             shape: BoxShape.circle
           ),
@@ -111,7 +111,7 @@ class ImageView extends StatelessWidget {
       onPressed: () => controller.showImageTextDialog(context),
       padding: EdgeInsets.zero,
       style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.deepPurple.shade900)),
-      icon: Iconify(MaterialSymbols.edit_note_rounded, color: Colors.white,)
+      icon: const Iconify(MaterialSymbols.edit_note_rounded, color: Colors.white,)
     );
   }
 }

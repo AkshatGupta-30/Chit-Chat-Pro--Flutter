@@ -25,34 +25,34 @@ class ImageToTextController extends GetxController {
       context: context,
       builder: (context) => Container(
         height: 125, width: double.maxFinite, color: kDefaultIconDarkColor,
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
               onPressed: () => _pickImage(context, ImageSource.camera),
-              padding: EdgeInsets.all(6),
+              padding: const EdgeInsets.all(6),
               icon: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CircleAvatar(
                     radius: 30, backgroundColor: Colors.grey.shade800,
-                    child: Iconify(MaterialSymbols.camera, color: Colors.white, size: 35,)
+                    child: const Iconify(MaterialSymbols.camera, color: Colors.white, size: 35,)
                   ),
                   Text('Camera', style: theme.textTheme.bodyLarge!.copyWith(color: Colors.grey.shade200))
                 ],
               )
             ),
-            Gap(5),
+            const Gap(5),
             IconButton(
               onPressed: () => _pickImage(context, ImageSource.gallery),
-              padding: EdgeInsets.all(6),
+              padding: const EdgeInsets.all(6),
               icon: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   CircleAvatar(
                     radius: 30, backgroundColor: Colors.grey.shade800,
-                    child: Iconify(Ooui.image_gallery, color: Colors.white, size: 35,)
+                    child: const Iconify(Ooui.image_gallery, color: Colors.white, size: 35,)
                   ),
                   Text('Gallery', style: theme.textTheme.bodyLarge!.copyWith(color: Colors.grey.shade200))
                 ],

@@ -56,7 +56,7 @@ class ChatController extends GetxController {
           isScrollAbove.value = false;
         }
         _hideTimer?.cancel();
-        _hideTimer = Timer(Duration(seconds: 2), () => fabVisible.value = false);
+        _hideTimer = Timer(const Duration(seconds: 2), () => fabVisible.value = false);
       }
     });
   }
@@ -64,7 +64,7 @@ class ChatController extends GetxController {
   void startTimer() {
     countdown.value = 20;
     isButtonEnabled.value = false;
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       countdown.value -= 1;
       if (countdown.value <= 0) {
         t.cancel();
@@ -73,9 +73,9 @@ class ChatController extends GetxController {
     });
   }
 
-  void scrollUp() => scrollController.animateTo(0, duration: Duration(milliseconds: 250), curve: Curves.easeInOut,);
+  void scrollUp() => scrollController.animateTo(0, duration: const Duration(milliseconds: 250), curve: Curves.easeInOut,);
 
-  void scrollDown() =>  scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 250), curve: Curves.easeInOut);
+  void scrollDown() =>  scrollController.animateTo(scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
 
   Future<void> submit({String? prompt}) async {
     startTimer();
@@ -140,8 +140,11 @@ class ChatController extends GetxController {
 
   bool onNotification(UserScrollNotification notification) {
     final ScrollDirection direction = notification.direction;
-    if (direction == ScrollDirection.reverse) fabVisible.value = false;
-    else if (direction == ScrollDirection.forward) fabVisible.value = true;
+    if (direction == ScrollDirection.reverse) {
+      fabVisible.value = false;
+    } else if (direction == ScrollDirection.forward) {
+      fabVisible.value = true;
+    }
     return true;
   }
 

@@ -10,7 +10,7 @@ import 'package:iconify_flutter/iconify.dart';
 class PromptSection extends StatelessWidget {
   final int index;
   final PCController controller;
-  PromptSection(this.index, this.controller, {super.key});
+  const PromptSection(this.index, this.controller, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class PromptSection extends StatelessWidget {
     return Column(
       children: [
         _header(context, userPrompt),
-        Gap(5),
+        const Gap(5),
         _promptArea(userPrompt, context),
-        Gap(10),
+        const Gap(10),
         _submitCancelBtn(context)
       ],
     );
@@ -31,37 +31,37 @@ class PromptSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        FluentUiEmojiIcon(fl: Fluents.flBoy, w: 20, h: 20,), Gap(10),
+        const FluentUiEmojiIcon(fl: Fluents.flBoy, w: 20, h: 20,), const Gap(10),
         Text('You', style: Theme.of(context).primaryTextTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w800, fontSize: 22)),
-        Spacer(),
+        const Spacer(),
         if(prompt.image == null)
           Obx(() => (controller.isReEdit.value)
-              ? SizedBox()
+              ? const SizedBox()
               : InkWell(
                 onTap: controller.editTapped,
-                child: Iconify(Bx.rename, color: Colors.grey,),
+                child: const Iconify(Bx.rename, color: Colors.grey,),
               )
           ),
-        Gap(8),
+        const Gap(8),
         InkWell(
           onTap: () => controller.chatController.copy(index),
-          child: Iconify(Uiw.copy, color: Colors.grey, size: 20,)
+          child: const Iconify(Uiw.copy, color: Colors.grey, size: 20,)
         ),
-        Gap(8),
+        const Gap(8),
         if(controller.chatController.contents.length-1 == index) ...[
           (controller.chatController.isButtonEnabled.value)
               ? InkWell(
                 onTap: () => (controller.chatController.isButtonEnabled.value) ? controller.chatController.refreshChat() : null,
-                child: Iconify(Typcn.refresh_outline, color: Colors.grey, size: 27,)
+                child: const Iconify(Typcn.refresh_outline, color: Colors.grey, size: 27,)
               )
-              : SpinKitRipple(color: Colors.grey, size: 27,),
-          Gap(8),
+              : const SpinKitRipple(color: Colors.grey, size: 27,),
+          const Gap(8),
         ],
         InkWell(
           onTap: () => controller.chatController.deletePromptContentSection(index),
-          child: Iconify(Mdi.delete_outline, color: Colors.grey,),
+          child: const Iconify(Mdi.delete_outline, color: Colors.grey,),
         ),
-        Gap(8),
+        const Gap(8),
       ]
     ));
   }
@@ -70,7 +70,7 @@ class PromptSection extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Gap(30),
+        const Gap(30),
         Expanded(
           child: Obx(() {
             if(!controller.isReEdit.value) {
@@ -98,7 +98,7 @@ class PromptSection extends StatelessWidget {
               cursorColor: Colors.grey.shade400,
               style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 15),
               decoration: InputDecoration(
-                constraints: BoxConstraints(minHeight: 10, minWidth: double.maxFinite),
+                constraints: const BoxConstraints(minHeight: 10, minWidth: double.maxFinite),
                 contentPadding: EdgeInsets.zero,
                 border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400),),
                 enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey.shade400)),
@@ -122,7 +122,7 @@ class PromptSection extends StatelessWidget {
               onTap: () => (controller.chatController.isButtonEnabled.value) ? controller.confirm() : null,
               borderRadius: BorderRadius.circular(12),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8), alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8), alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: (controller.chatController.isButtonEnabled.value) ? Colors.cyanAccent.shade700 : Colors.black,
                   borderRadius: BorderRadius.circular(12)
@@ -130,12 +130,12 @@ class PromptSection extends StatelessWidget {
                 child: Text('Confirm', style: Theme.of(context).primaryTextTheme.titleMedium,),
               ),
             ),
-            Gap(15),
+            const Gap(15),
             InkWell(
               onTap: controller.cancel,
               borderRadius: BorderRadius.circular(12),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8), alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8), alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade700,
                   borderRadius: BorderRadius.circular(12)
@@ -145,7 +145,7 @@ class PromptSection extends StatelessWidget {
             ),
           ],
         )
-        : Gap(0)
+        : const Gap(0)
     );
   }
 }

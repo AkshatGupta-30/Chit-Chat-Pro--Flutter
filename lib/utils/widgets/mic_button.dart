@@ -18,10 +18,10 @@ class MicButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(45),
       child: Container(
         width: 45, height: 45, alignment: Alignment.center,
-        decoration: BoxDecoration(color: Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
+        decoration: BoxDecoration(color: const Color(0xFF2d6a4f), borderRadius: BorderRadius.circular(45)),
         child: Obx(() => (controller.listening.value)
-            ? SpinKitWave(color: Colors.white, size: 24, itemCount: 12, type: SpinKitWaveType.center,)
-            : Iconify(Fa6Solid.microphone_lines, size: 24, color: Colors.white,)
+            ? const SpinKitWave(color: Colors.white, size: 24, itemCount: 12, type: SpinKitWaveType.center,)
+            : const Iconify(Fa6Solid.microphone_lines, size: 24, color: Colors.white,)
         )
       ),
     );
