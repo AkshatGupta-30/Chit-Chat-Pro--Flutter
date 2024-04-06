@@ -11,6 +11,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:iconify_flutter/iconify.dart';
 import 'package:super_string/super_string.dart';
 
 class ChatController extends GetxController {
@@ -169,19 +170,31 @@ class ChatController extends GetxController {
               color: Colors.grey.shade800,
               borderRadius: const BorderRadius.vertical(top: Radius.circular(20))
             ),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Text(
-                codeBlock.substring(0, firstNewlineIndex).replaceAll('```', '').title(),
-                style: const TextStyle(fontSize: 20, color: Colors.white),
-              ),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    codeBlock.substring(0, firstNewlineIndex).replaceAll('```', '').title(),
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+                const Spacer(),
+                TextButton.icon(
+                  onPressed: () async {
+                    await FlutterClipboard.copy(codeBlock).then((value) => Get.rawSnackbar(title: 'Copied to Clipboard', messageText: const SizedBox()));
+                  },
+                  icon: const Iconify(MaterialSymbols.content_copy_outline, color: Colors.white70),
+                  label: const Text('Copy', style: TextStyle(color: Colors.white70, fontSize: 18))
+                )
+              ],
             ),
           )
         ),
         WidgetSpan(// * : Actual Code
           child: Container(
             width: double.maxFinite, padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            margin: EdgeInsets.only(bottom: 10),
+            margin: const EdgeInsets.only(bottom: 10),
             decoration: const BoxDecoration(
               color: Colors.black,
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
