@@ -1,4 +1,4 @@
-# Chit Chat Pro [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/AkshatGupta-30/Sonicity--Flutter/blob/main/LICENSE)  
+# Chit Chat Pro [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter/blob/main/LICENSE)  
 
 
 Chit Chat Pro is a cutting-edge application designed to emulate the functionalities of chat GPT, focusing on seamless communication and content creation. It integrates advanced features such as text-to-speech, speech-to-text, and image-to-text conversion, all wrapped in an efficient and user-friendly interface.
@@ -64,7 +64,7 @@ Chit Chat Pro is a cutting-edge application designed to emulate the functionalit
 ----
 
 ## Installation
-Follow these steps to install and run Sonicity on your system.
+Follow these steps to install and run Chit Chat Pro on your system.
 
 ### Prerequisites
 Before you begin, ensure you have the following dependencies and tools installed:
@@ -97,7 +97,7 @@ This will build the project and install it on your connected device or emulator.
 ## Folder Structure
 #### Here is the core folder structure which flutter provides.
 ```
-sonicity/
+chit_chat_pro/
 |- android
 |- assets
 |- ios
@@ -161,7 +161,7 @@ We extend our heartfelt gratitude to OpenAI for their exceptional APIs, which ha
 ----
 
 ## License
-Sonicity is licensed under the [**MIT License**](https://github.com/AkshatGupta-30/Sonicity--Flutter/blob/main/LICENSE)
+Chit Chat Pro is licensed under the [**MIT License**](https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter/blob/main/LICENSE)
 
 ----
 
