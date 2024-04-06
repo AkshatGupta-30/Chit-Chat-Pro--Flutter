@@ -5,6 +5,13 @@ Chit Chat Pro is a cutting-edge application designed to emulate the functionalit
 
 ----
 
+# Screenshots
+| Home Screen | Text From Image Screen | Details Screen |
+| --- | --- | --- |
+| <img src="https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter/blob/main/assets/screenshots/home_view.jpg" alt="Home Screen" height="300"> | <img src="https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter/blob/main/assets/screenshots/text_from_image_view.jpg" alt="ext From Image Screen" height="300" width="135"> | <img src="https://github.com/AkshatGupta-30/Chit-Chat-Pro--Flutter/blob/main/assets/screenshots/details_screen.jpg" alt="Details Screen" height="300" width="135"> |
+
+----
+
 details>
 <summary>Table of content</summary>
 
