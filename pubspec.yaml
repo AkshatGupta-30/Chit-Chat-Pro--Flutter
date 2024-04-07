@@ -1,7 +1,7 @@
 name: chit_chat_pro
 description: "Chit Chat Pro is a cutting-edge application designed to emulate the functionalities of chat GPT, focusing on seamless communication and content creation. It integrates advanced features such as text-to-speech, speech-to-text, and image-to-text conversion, all wrapped in an efficient and user-friendly interface."
 publish_to: 'none'
-version: 0.1.0
+version: 0.2.0
 
 environment:
   sdk: '>=3.3.1 <4.0.0'
