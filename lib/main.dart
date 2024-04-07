@@ -1,4 +1,4 @@
-import 'package:chit_chat_pro/src/pages/home_page.dart';
+import 'package:chit_chat_pro/src/pages/splash_page.dart';
 import 'package:chit_chat_pro/utils/constants/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
       title: 'Chit Chat Pro',
       debugShowCheckedModeBanner: false,
       theme: themeData,
-      home: const HomePage()
+      home: const SplashPage()
     );
   }
 }

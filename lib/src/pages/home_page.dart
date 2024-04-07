@@ -1,6 +1,4 @@
 import 'package:chit_chat_pro/src/controllers/chat_controller.dart';
-import 'package:chit_chat_pro/src/controllers/image_to_text_controller.dart';
-import 'package:chit_chat_pro/src/controllers/speech_to_text_controller.dart';
 import 'package:chit_chat_pro/src/pages/main_view.dart';
 import 'package:chit_chat_pro/src/pages/bottom_view.dart';
 import 'package:circular_countdown/circular_countdown.dart';
@@ -13,9 +11,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ChatController());
-    Get.put(ImageToTextController());
-    Get.put(SpeechToTextController());
     return Scaffold(
       appBar: _appBar(context),
       body: _body(),
