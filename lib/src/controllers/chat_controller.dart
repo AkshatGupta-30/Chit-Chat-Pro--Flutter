@@ -11,7 +11,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:iconify_flutter/iconify.dart';
 import 'package:super_string/super_string.dart';
 
 class ChatController extends GetxController {
@@ -165,27 +164,27 @@ class ChatController extends GetxController {
       spans.addAll([
         WidgetSpan(// * : Code Language
           child: Container(
-            width: double.maxFinite, height: 40,
+            width: double.maxFinite, height: 30,
             decoration: BoxDecoration(
               color: Colors.grey.shade800,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20))
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(10))
             ),
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                   child: Text(
                     codeBlock.substring(0, firstNewlineIndex).replaceAll('```', '').title(),
-                    style: const TextStyle(fontSize: 20, color: Colors.white),
+                    style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
                 const Spacer(),
-                TextButton.icon(
+                TextButton(
                   onPressed: () async {
                     await FlutterClipboard.copy(codeBlock).then((value) => Get.rawSnackbar(title: 'Copied to Clipboard', messageText: const SizedBox()));
                   },
-                  icon: const Iconify(MaterialSymbols.content_copy_outline, color: Colors.white70),
-                  label: const Text('Copy', style: TextStyle(color: Colors.white70, fontSize: 18))
+                  style: const ButtonStyle(padding: MaterialStatePropertyAll(EdgeInsets.zero)),
+                  child: const Text('Copy', style: TextStyle(color: Colors.white70, fontSize: 14))
                 )
               ],
             ),
